@@ -5,7 +5,6 @@ function HomePage() {
     return (
         <>
 
-
             <div className=" mt-2">
                 <div className="w-11/12 mx-auto">
                     <p className="font-bold">Productos de calidad</p>
@@ -27,7 +26,7 @@ function HomePage() {
                 <CategoriaSection />
             </div>
 
-            <div className="bg-slate-50 pt-16 text-center">
+            <div className="bg-slate-50 pt-16 text-center pb-12">
                 <p>¿No encontró lo que buscaba?</p>
                 <p className="py-16">Escríbanos</p>
                 <p className="pb-16">Podemos ayudarle</p>
@@ -71,6 +70,38 @@ function HomePage() {
                     </div>
                 </form>
             </div>
+
+            <footer className="bg-cyan-900 text-white">
+                <div className="w-11/12 mx-auto pt-8">
+                    <div className="flex">
+                        <div className="w-3/6 ">
+                            <div className="flex mb-1">
+                                <p className="w-2/6 text-center rounded-full py-5 bg-slate-400">img</p>
+                                <h2 className="w-3/6 text-xl pt-4 ml-3">EPOS</h2>
+                            </div>
+                            <p className="text-sm text-justify">Refacciones automotrices al alcance de un click.</p>
+                        </div>
+                        <div className="w-2/6 mt-4 ml-auto ">
+                            <h2 className="text-bold mb-2">Contacto</h2>
+                            <p className="text-sm">33 4343 3234</p>
+                            <p className="text-sm">33 4343 3234</p>
+                            <p className="text-sm">epos@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-14">
+                        <h3 className="text-center mb-4">Redes sociales</h3>
+                        <div className="flex gap-16 w-10/12 mx-auto">
+                            <p className="w-2/6 text-center rounded-full py-5 bg-slate-400">img</p>
+                            <p className="w-2/6 text-center rounded-full py-5 bg-slate-400">img</p>
+                            <p className="w-2/6 text-center rounded-full py-5 bg-slate-400">img</p>
+                        </div>
+                    </div>
+                    <p className="text-center mt-8 text-xs">Made by RL </p>
+                </div>
+            </footer>
+
+
         </>
     );
 }

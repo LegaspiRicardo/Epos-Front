@@ -21,14 +21,6 @@ const BottomBar = () => {
             >
                 <div className="flex justify-around items-center py-3 text-sm ">
                     <Link
-                        to="/"
-                        className="hover:text-amber-500 hover:font-bold transition-colors"
-                        onClick={() => setIsOpen(false)}
-                    >
-                        Inicio
-                    </Link>
-
-                    <Link
                         to="/categorias"
                         className="hover:text-amber-500 hover:font-bold transition-colors"
                         onClick={() => setIsOpen(false)}
@@ -42,6 +34,14 @@ const BottomBar = () => {
                         onClick={() => setIsOpen(false)}
                     >
                         Marcas
+                    </Link>
+
+                    <Link
+                        to="/tienda"
+                        className="hover:text-amber-500 hover:font-bold transition-colors"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Productos
                     </Link>
 
                     <Link
