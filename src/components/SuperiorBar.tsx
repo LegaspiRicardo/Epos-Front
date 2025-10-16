@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SuperiorBar = () => {
     return (
         <header className="bg-cyan-950 text-white py-3 px-6 shadow-md">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div className="">
                     <Link
                         to="/"
                         className="hover:text-amber-400 transition-colors text-2xl"

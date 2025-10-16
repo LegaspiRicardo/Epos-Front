@@ -1,5 +1,3 @@
-import CategoriaTiendaCarousel from "../components/carousel/CategoriaTiendaCarousel";
-import MarcaTiendaCarousel from "../components/carousel/MarcaTiendaCarousel";
 
 import React from "react";
 

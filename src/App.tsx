@@ -8,6 +8,7 @@ import Marcas from "./pages/Marcas";
 import Acabados from "./pages/Acabados";
 import Tienda from "./pages/Tienda";
 import Perfil from "./pages/Perfil";
+import Detalle from "./pages/Detalle";
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="acabados" element={<Acabados />} />
           <Route path="tienda" element={<Tienda />} />
           <Route path="perfil" element={<Perfil />} />
+          <Route path="detalle" element={<Detalle />} />
         </Route>
       </Routes>
     </Router>
