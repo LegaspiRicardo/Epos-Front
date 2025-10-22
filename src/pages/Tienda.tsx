@@ -51,24 +51,26 @@ const Tienda: React.FC = () => {
             <div className="w-11/12 mx-auto mt-8 ">
                 {/* CONTENEDOR SCROLLABLE */}
                 <div
-                    className="pb-4 "
+                    className="pb-4 b"
                 >
                     {cardData.map((card) => (
-                        <div key={card.id} className=" my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
-                            <div className="flex w-full">
-                                <div className="w-5/12 h-32 bg-slate-300 ">
-                                    <p className="text-center  pt-14">Img</p>
-                                </div>
-                                <div className="w-7/12 ml-4 ">
-                                    <h3 className="text-2xl font-semibold mb-1 text-justify">{card.nombre}</h3>
-                                    <p className="text-xs ">{card.descripcion}</p>
-                                    <p className="text-xs mb-1">Acabado: {card.acabado}</p>
+                        <a href="/detalle">
+                            <div key={card.id} className=" my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
+                                <div className="flex w-full">
+                                    <div className="w-5/12 h-32 bg-slate-300 ">
+                                        <p className="text-center  pt-14">Img</p>
+                                    </div>
+                                    <div className="w-7/12 ml-4 ">
+                                        <h3 className="text-2xl font-semibold mb-1 text-justify">{card.nombre}</h3>
+                                        <p className="text-xs ">{card.descripcion}</p>
+                                        <p className="text-xs mb-1">Acabado: {card.acabado}</p>
 
-                                    <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
-                                </div>
+                                        <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>

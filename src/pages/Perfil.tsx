@@ -70,25 +70,27 @@ const Perfil: React.FC = () => {
                     className="pb-4 "
                 >
                     {cardData.map((card) => (
-                        <div key={card.id} className=" my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
-                            <div className="flex w-full">
-                                <div className="w-5/12 h-32 bg-slate-300 ">
-                                    <p className="text-center  pt-14">Img</p>
-                                </div>
-                                <div className="w-7/12 ml-4">
-                                    <div className="flex ">
-                                        <h3 className="text-2xl font-semibold mb-1 w-4/6 text-justify">{card.nombre}</h3>
-                                        <p className=" mx-auto rounded-full px-2 pt-1 bg-slate-500">⭐</p>
+                        <a href="/detalle">
+                            <div key={card.id} className=" my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
+                                <div className="flex w-full">
+                                    <div className="w-5/12 h-32 bg-slate-300 ">
+                                        <p className="text-center  pt-14">Img</p>
+                                    </div>
+                                    <div className="w-7/12 ml-4">
+                                        <div className="flex ">
+                                            <h3 className="text-xl font-semibold mb-1 w-4/6 text-justify">{card.nombre}</h3>
+                                            <p className=" mx-auto rounded-full px-2 pt-1 bg-slate-500">⭐</p>
+                                        </div>
+
+                                        <p className="text-xs ">{card.descripcion}</p>
+                                        <p className="text-xs mb-1">Acabado: {card.acabado}</p>
+
+                                        <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
                                     </div>
 
-                                    <p className="text-xs ">{card.descripcion}</p>
-                                    <p className="text-xs mb-1">Acabado: {card.acabado}</p>
-
-                                    <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
                                 </div>
-
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>
