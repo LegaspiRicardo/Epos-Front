@@ -14,20 +14,20 @@ const cardData: CardItem[] = [
 
 const HomeCarousel: React.FC = () => {
     return (
-        <div className="w-11/12 mx-auto mt-8">
+        <div className=" mx-auto mt-12 mb-12">
             {/* CONTENEDOR SCROLLABLE */}
             <div
-                className="flex gap-4 overflow-x-auto scroll-smooth pb-4 scrollbar-hide snap-x snap-mandatory"
+                className="flex gap-6 overflow-x-auto scroll-smooth pb-6 scrollbar-hide snap-x snap-mandatory"
             >
                 {cardData.map((card) => (
-                    <div key={card.id} className="flex-shrink-0  w-72 bg-cyan-900 text-white shadow-lg py-5 px-2 snap-start transition-transform hover:scale-105 duration-300">
-                        <div  className="flex w-full">
+                    <div key={card.id} className="flex-shrink-0 w-96 bg-cyan-900 text-white shadow-lg py-8 px-6 snap-start transition-transform hover:scale-105 duration-300 rounded-xl">
+                        <div className="flex w-full items-center">
                             <div className="w-7/12">
-                                <h3 className="text-2xl font-semibold mb-2 text-justify">{card.nombre}</h3>
-                                <p className="text-xs mb-1">{card.descripcion}</p>
+                                <h3 className="text-2xl font-bold mb-4 text-justify leading-tight">{card.nombre}</h3>
+                                <p className="text-base mb-1 leading-relaxed">{card.descripcion}</p>
                             </div>
-                            <div className="w-6/12 bg-slate-300 ml-4">
-                                <p className="text-center pt-10">Img</p>
+                            <div className="w-5/12 bg-slate-300 ml-6 h-32 flex items-center justify-center rounded-lg">
+                                <p className="text-center text-gray-600 font-medium">Imagen</p>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,4 @@
 import SuperiorBar from "./SuperiorBar";
-import BottomBar from "./BottomBar";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
@@ -9,7 +8,6 @@ const Layout = () => {
             <main className="flex-1 bg-white p-0">
                 <Outlet /> {/* Aquí se renderiza la vista actual */}
             </main>
-            <BottomBar />
         </div>
     );
 };
