@@ -1,11 +1,10 @@
-
-
 import React from "react";
+import { Link } from "react-router-dom"; // <- Agregar este import
 
 interface CardItem {
     id: number;
     nombre: string;
-    img: string;  //Revisar que chow con la imagen
+    img: string;
 }
 
 const cardData: CardItem[] = [
@@ -18,40 +17,33 @@ const cardData: CardItem[] = [
 
 const Categorias: React.FC = () => {
     return (
-
-
-
-        <div >
+        <div>
             <div className="w-11/12 mx-auto mt-2">
                 <p className="font-bold">Categorías</p>
                 <p>Selecciona una</p>
             </div>
             <hr className="mb-4" />
 
-            <div className="grid grid-cols-2  bg-cyan-900">
-
-
-
+            <div className="grid grid-cols-2 bg-cyan-900">
                 {cardData.map((card) => (
                     <div
                         key={card.id}
-                        className=" shadow-lg py-5 px-2 rounded-lg transition-transform hover:scale-105 duration-300 text-white"
+                        className="shadow-lg py-5 px-2 rounded-lg transition-transform hover:scale-105 duration-300 text-white"
                     >
                         <div className="flex w-full">
                             <div className="w-11/12 mx-auto flex flex-col items-center">
-                                <a href="/marcas" className="w-full">
+                                <Link to="/marcas" className="w-full"> {/* Cambiado a Link */}
                                     <div className="w-full bg-slate-100 rounded text-center text-black">
                                         <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
                                         <h3 className="text-md p-1">{card.nombre}</h3>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
         </div>
-
     );
 };
 

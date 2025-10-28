@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import HomeCarousel from "../components/carousel/HomeCarousel";
@@ -6,37 +7,37 @@ import HomeCarousel from "../components/carousel/HomeCarousel";
 type Direction = "up" | "down" | "left" | "right";
 
 interface AnimatedSectionProps {
-  children: React.ReactNode;
-  delay?: number;
-  direction?: Direction;
-  className?: string;
+    children: React.ReactNode;
+    delay?: number;
+    direction?: Direction;
+    className?: string;
 }
 
 // Componente animado reutilizable
 const AnimatedSection = ({ children, delay = 0, direction = "up", className = "" }: AnimatedSectionProps) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
 
-  const directions = {
-    up: { y: 50, opacity: 0 },
-    down: { y: -50, opacity: 0 },
-    left: { x: 50, opacity: 0 },
-    right: { x: -50, opacity: 0 },
-  };
+    const directions = {
+        up: { y: 50, opacity: 0 },
+        down: { y: -50, opacity: 0 },
+        left: { x: 50, opacity: 0 },
+        right: { x: -50, opacity: 0 },
+    };
 
-  return (
-    <motion.div
-      ref={ref}
-      initial={directions[direction]}
-      animate={inView ? { y: 0, x: 0, opacity: 1 } : directions[direction]}
-      transition={{ duration: 0.6, delay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+    return (
+        <motion.div
+            ref={ref}
+            initial={directions[direction]}
+            animate={inView ? { y: 0, x: 0, opacity: 1 } : directions[direction]}
+            transition={{ duration: 0.6, delay }}
+            className={className}
+        >
+            {children}
+        </motion.div>
+    );
 };
 
 function HomePage() {
@@ -49,7 +50,7 @@ function HomePage() {
                     <AnimatedSection delay={0.2} direction="down">
                         <img src="/logotipoepos.png" alt="" className="bg-white/60 rounded-xl" />
                     </AnimatedSection>
-                    
+
                     <AnimatedSection delay={0.4} direction="up">
                         <div className="bg-white/70 bg-opacity-90 p-8 rounded-lg max-w-2xl mx-auto mt-12">
                             <p className="text-justify mb-8 text-gray-800 text-lg leading-relaxed font-semibold">
@@ -83,12 +84,12 @@ function HomePage() {
                                 { href: "/categorias", icon: "/icons/tuerca.png", name: "Tuercas" },
                             ].map((product, index) => (
                                 <AnimatedSection key={product.name} delay={0.1 * index} direction="up">
-                                    <a href={product.href}>
+                                    <Link to={product.href}>
                                         <div className="bg-white border rounded-lg p-4 text-center hover:scale-110 transform transition-transform duration-300 ease-in-out">
                                             <img src={product.icon} alt={product.name} className="w-16 h-16 mx-auto mb-2" />
                                             <p className="font-semibold text-lg">{product.name}</p>
                                         </div>
-                                    </a>
+                                    </Link>
                                 </AnimatedSection>
                             ))}
                         </div>
