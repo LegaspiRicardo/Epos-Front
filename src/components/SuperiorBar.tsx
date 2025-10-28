@@ -21,30 +21,30 @@ const SuperiorBar = () => {
 
     return (
         <>
-            <header className={`bg-cyan-950 text-white py-3 px-6 shadow-md transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
-                <div className="flex justify-between items-center">
-                    <div className="flex items-center">
-                        <a
-                            href="/"
-                            className="hover:text-amber-400 transition-colors"
-                        >
-                            <img src="/logoepos.png" alt="" className="w-24" />
-                        </a>
-                        <p className="text-sm text-gray-300 ml-4 hidden md:block">
-                            Comercializadora industrial
-                        </p>
-                    </div>
-
-                    {/* Botón para abrir/cerrar el menú lateral */}
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="hover:text-amber-500 transition-colors flex flex-col items-center text-xs group"
-                    >
-                        <div className="w-8 h-8 flex items-center justify-center bg-cyan-800 rounded-lg group-hover:bg-cyan-700 transition-colors">
-                            <span className="text-lg font-bold">☰</span>
+            <header className={`bg-cyan-950 text-white py-3 shadow-md transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
+                {/* Contenedor con el mismo ancho máximo que el layout */}
+                <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                            <Link
+                                to="/"
+                                className="hover:text-amber-400 transition-colors"
+                            >
+                                <img src="/logoepos.png" alt="EPOS Logo" className="w-24" />
+                            </Link>
                         </div>
-                        <span className="hidden sm:block mt-1">Menú</span>
-                    </button>
+
+                        {/* Botón para abrir/cerrar el menú lateral */}
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="hover:text-amber-500 transition-colors flex flex-col items-center text-xs group"
+                        >
+                            <div className="w-8 h-8 flex items-center justify-center bg-cyan-800 rounded-lg group-hover:bg-cyan-700 transition-colors">
+                                <span className="text-lg font-bold">☰</span>
+                            </div>
+                            <span className="hidden sm:block mt-1">Menú</span>
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -53,9 +53,9 @@ const SuperiorBar = () => {
                 <div className="p-6">
                     {/* Header del menú lateral */}
                     <div className="flex justify-between items-center mb-8">
-                        <a href="/">
+                        <Link to="/" onClick={() => setIsMenuOpen(false)}>
                             <h2 className="text-xl font-bold">EPOS Industrial</h2>
-                        </a>
+                        </Link>
                         <button
                             onClick={() => setIsMenuOpen(false)}
                             className="text-white hover:text-amber-500 text-2xl"

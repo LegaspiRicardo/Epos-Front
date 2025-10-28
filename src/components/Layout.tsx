@@ -3,11 +3,14 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
     return (
-        <div className="">
+        <div className="min-h-screen bg-white">
             <SuperiorBar />
-            <main className="flex-1 bg-white p-0">
-                <Outlet /> {/* Aquí se renderiza la vista actual */}
-            </main>
+            
+            <div className="max-w-5xl mx-auto w-full"> 
+                <main className="flex-1 bg-white p-0">
+                    <Outlet /> 
+                </main>
+            </div>
         </div>
     );
 };

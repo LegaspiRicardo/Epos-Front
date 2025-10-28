@@ -48,7 +48,7 @@ function HomePage() {
             <div className="min-h-screen pb-12 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/fondotornillos.jpg')" }}>
                 <div className="w-11/12 mx-auto pt-24">
                     <AnimatedSection delay={0.2} direction="down">
-                        <img src="/logotipoepos.png" alt="" className="bg-white/60 rounded-xl" />
+                        <img src="/logotipoepos.png" alt="" className="bg-white/60 rounded-xl mx-auto" />
                     </AnimatedSection>
 
                     <AnimatedSection delay={0.4} direction="up">
