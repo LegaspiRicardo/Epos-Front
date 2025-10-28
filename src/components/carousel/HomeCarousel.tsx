@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom"; 
 import React from "react";
 
 interface CardItem {
@@ -25,7 +27,7 @@ const HomeCarousel: React.FC = () => {
                 {cardData.map((card) => (
                     <div key={card.id} className="flex-shrink-0 w-96 bg-cyan-900 text-white shadow-lg py-8 px-6 snap-start transition-transform hover:scale-105 duration-300 rounded-xl">
 
-                        <a href="/categorias" className="w-full">
+                        <Link to="/categorias" className="w-full">
                             <div className="flex w-full items-center">
                                 <div className="w-7/12">
                                     <h3 className="text-2xl font-bold mb-4 text-justify leading-tight">{card.nombre}</h3>
@@ -36,7 +38,7 @@ const HomeCarousel: React.FC = () => {
                                 </div>
 
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>
