@@ -1,16 +1,15 @@
+import React from "react";
+import { Link } from "react-router-dom"; 
 import CategoriaTiendaCarousel from "../components/carousel/CategoriaTiendaCarousel";
 import MarcaTiendaCarousel from "../components/carousel/MarcaTiendaCarousel";
-
-import React from "react";
 
 interface CardItem {
     id: number;
     nombre: string;
-    img: string;  //Revisar que chow con la imagen
+    img: string;
     descripcion: string;
     acabado: string;
     precio: number;
-
 }
 
 const cardData: CardItem[] = [
@@ -30,7 +29,6 @@ const cardData: CardItem[] = [
     { id: 14, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
     { id: 15, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
     { id: 16, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
-
 ];
 
 const Tienda: React.FC = () => {
@@ -40,37 +38,31 @@ const Tienda: React.FC = () => {
                 <div className="w-11/12 mx-auto">
                     <CategoriaTiendaCarousel />
                 </div>
-
             </div>
             <hr />
             <div className="mt-4">
                 <MarcaTiendaCarousel />
             </div>
 
-
-            <div className="w-11/12 mx-auto mt-8 ">
+            <div className="w-11/12 mx-auto mt-8">
                 {/* CONTENEDOR SCROLLABLE */}
-                <div
-                    className="pb-4 b"
-                >
+                <div className="pb-4">
                     {cardData.map((card) => (
-                        <a href="/detalle">
-                            <div key={card.id} className=" my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
+                        <Link to="/detalle" key={card.id}> 
+                            <div className="my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
                                 <div className="flex w-full">
-                                    <div className="w-5/12 h-32 bg-slate-300 ">
-                                        <p className="text-center  pt-14">Img</p>
+                                    <div className="w-5/12 h-32 bg-slate-300">
+                                        <p className="text-center pt-14">Img</p>
                                     </div>
-                                    <div className="w-7/12 ml-4 ">
+                                    <div className="w-7/12 ml-4">
                                         <h3 className="text-2xl font-semibold mb-1 text-justify">{card.nombre}</h3>
-                                        <p className="text-xs ">{card.descripcion}</p>
+                                        <p className="text-xs">{card.descripcion}</p>
                                         <p className="text-xs mb-1">Acabado: {card.acabado}</p>
-
                                         <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
                                     </div>
-
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>
