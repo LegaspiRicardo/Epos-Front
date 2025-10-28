@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // <- Agregar este import
+import { Link } from "react-router-dom"; 
 
 interface CardItem {
     id: number;
@@ -32,7 +32,7 @@ const Categorias: React.FC = () => {
                     >
                         <div className="flex w-full">
                             <div className="w-11/12 mx-auto flex flex-col items-center">
-                                <Link to="/marcas" className="w-full"> {/* Cambiado a Link */}
+                                <Link to="/marcas" className="w-full"> 
                                     <div className="w-full bg-slate-100 rounded text-center text-black">
                                         <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
                                         <h3 className="text-md p-1">{card.nombre}</h3>
