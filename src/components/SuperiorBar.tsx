@@ -24,17 +24,17 @@ const SuperiorBar = () => {
             <header className={`bg-cyan-950 text-white py-3 px-6 shadow-md transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
                 <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <Link
-                            to="/"
+                        <a
+                            href="/"
                             className="hover:text-amber-400 transition-colors"
                         >
                             <img src="/logoepos.png" alt="" className="w-24" />
-                        </Link>
+                        </a>
                         <p className="text-sm text-gray-300 ml-4 hidden md:block">
                             Comercializadora industrial
                         </p>
                     </div>
-                    
+
                     {/* Botón para abrir/cerrar el menú lateral */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -53,7 +53,9 @@ const SuperiorBar = () => {
                 <div className="p-6">
                     {/* Header del menú lateral */}
                     <div className="flex justify-between items-center mb-8">
-                        <h2 className="text-xl font-bold">EPOS Industrial</h2>
+                        <a href="/">
+                            <h2 className="text-xl font-bold">EPOS Industrial</h2>
+                        </a>
                         <button
                             onClick={() => setIsMenuOpen(false)}
                             className="text-white hover:text-amber-500 text-2xl"
@@ -64,29 +66,29 @@ const SuperiorBar = () => {
 
                     {/* Links de navegación */}
                     <nav className="space-y-6">
-                        <NavLink 
-                            to="/categorias" 
-                            icon="/icons/categoria.png" 
-                            label="Categorías" 
-                            onClick={() => setIsMenuOpen(false)} 
+                        <NavLink
+                            to="/categorias"
+                            icon="/icons/categoria.png"
+                            label="Categorías"
+                            onClick={() => setIsMenuOpen(false)}
                         />
-                        <NavLink 
-                            to="/marcas" 
-                            icon="/icons/lupa.png" 
-                            label="Marcas" 
-                            onClick={() => setIsMenuOpen(false)} 
+                        <NavLink
+                            to="/marcas"
+                            icon="/icons/lupa.png"
+                            label="Marcas"
+                            onClick={() => setIsMenuOpen(false)}
                         />
-                        <NavLink 
-                            to="/tienda" 
-                            icon="/icons/producto.png" 
-                            label="Productos" 
-                            onClick={() => setIsMenuOpen(false)} 
+                        <NavLink
+                            to="/tienda"
+                            icon="/icons/producto.png"
+                            label="Productos"
+                            onClick={() => setIsMenuOpen(false)}
                         />
-                        <NavLink 
-                            to="/perfil" 
-                            icon="/icons/usuario.png" 
-                            label="Perfil" 
-                            onClick={() => setIsMenuOpen(false)} 
+                        <NavLink
+                            to="/perfil"
+                            icon="/icons/usuario.png"
+                            label="Perfil"
+                            onClick={() => setIsMenuOpen(false)}
                         />
                     </nav>
 
@@ -101,7 +103,7 @@ const SuperiorBar = () => {
 
             {/* Overlay para cerrar el menú al hacer clic fuera */}
             {isMenuOpen && (
-                <div 
+                <div
                     className="fixed inset-0 bg-black bg-opacity-50 z-40"
                     onClick={() => setIsMenuOpen(false)}
                 />
@@ -111,14 +113,14 @@ const SuperiorBar = () => {
 };
 
 // Componente auxiliar para los links de navegación
-const NavLink = ({ 
-    to, 
-    icon, 
-    label, 
-    onClick 
-}: { 
-    to: string; 
-    icon: string; 
+const NavLink = ({
+    to,
+    icon,
+    label,
+    onClick
+}: {
+    to: string;
+    icon: string;
     label: string;
     onClick: () => void;
 }) => (
@@ -127,10 +129,10 @@ const NavLink = ({
         onClick={onClick}
         className="flex items-center space-x-4 p-3 hover:bg-cyan-800 rounded-lg transition-colors group"
     >
-        <img 
-            src={icon} 
-            alt={label} 
-            className="w-8 h-8 group-hover:scale-110 transition-transform" 
+        <img
+            src={icon}
+            alt={label}
+            className="w-8 h-8 group-hover:scale-110 transition-transform"
         />
         <span className="text-lg font-medium group-hover:text-amber-400 transition-colors">
             {label}

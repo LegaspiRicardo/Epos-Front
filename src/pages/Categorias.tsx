@@ -24,10 +24,10 @@ const Categorias: React.FC = () => {
         <div >
             <div className="w-11/12 mx-auto mt-2">
                 <p className="font-bold">Categorías</p>
-                <p>Encuentra tu refacción ideal.</p>
+                <p>Selecciona una</p>
             </div>
             <hr className="mb-4" />
-            
+
             <div className="grid grid-cols-2  bg-cyan-900">
 
 
@@ -39,10 +39,12 @@ const Categorias: React.FC = () => {
                     >
                         <div className="flex w-full">
                             <div className="w-11/12 mx-auto flex flex-col items-center">
-                                <div className="w-full bg-slate-100 rounded text-center text-black">
-                                    <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
-                                    <h3 className="text-md p-1">{card.nombre}</h3>
-                                </div>
+                                <a href="/marcas" className="w-full">
+                                    <div className="w-full bg-slate-100 rounded text-center text-black">
+                                        <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
+                                        <h3 className="text-md p-1">{card.nombre}</h3>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>

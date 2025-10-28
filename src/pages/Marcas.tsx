@@ -20,7 +20,7 @@ const Marcas: React.FC = () => {
         <div >
             <div className="w-11/12 mx-auto mt-2">
                 <p className="font-bold">Marcas</p>
-                <p>Conoce las refacciones que manejamos.</p>
+                <p>Selecciona una</p>
             </div>
             <hr className="mb-4" />
 
@@ -32,10 +32,12 @@ const Marcas: React.FC = () => {
                     >
                         <div className="flex w-full bg-gray-200">
                             <div className="w-11/12 mx-auto flex flex-col  items-center">
-                                <div className="w-full bg-white rounded text-center text-black">
-                                    <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
-                                    <h3 className="text-md p-1">{card.nombre}</h3>
-                                </div>
+                                <a href="/tienda" className="w-full">
+                                    <div className="w-full bg-white rounded text-center text-black">
+                                        <p className="text-xs bg-slate-300 mb-1 py-16">{card.img}</p>
+                                        <h3 className="text-md p-1">{card.nombre}</h3>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
