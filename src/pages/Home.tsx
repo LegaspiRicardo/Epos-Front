@@ -79,7 +79,7 @@ function HomePage() {
                                 { href: "/categorias", icon: "/icons/birlo.png", name: "Birlos" },
                                 { href: "/categorias", icon: "/icons/tornillo.png", name: "Tornillos" },
                                 { href: "/marcas", icon: "/icons/muelle.png", name: "Muelles" },
-                                { href: "/productos", icon: "/icons/tools.png", name: "Herramientas" },
+                                { href: "/tienda", icon: "/icons/tools.png", name: "Herramientas" },
                                 { href: "/categorias", icon: "/icons/pijas.png", name: "Pijas" },
                                 { href: "/categorias", icon: "/icons/tuerca.png", name: "Tuercas" },
                             ].map((product, index) => (
