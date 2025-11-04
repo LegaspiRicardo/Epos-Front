@@ -1,8 +1,11 @@
-import React from "react";
+// Detalle.tsx (actualizado)
+import React, { useState } from "react";
 import type { Producto } from "../types/Producto";
 import Footer from '../components/Footer';
+import { usePedido } from '../context/PedidoContext';
+import ModalPedido from '../components/ModalPedido';
 
-// Datos simulados
+// Datos simulados (el mismo que tienes)
 const productoData: Producto[] = [
     {
         id: 1,
@@ -32,25 +35,29 @@ const productoData: Producto[] = [
 ];
 
 const Detalle: React.FC = () => {
+    const { dispatch } = usePedido();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const agregarAlPedido = (producto: Producto) => {
+        dispatch({ type: 'AGREGAR_ITEM', payload: producto });
+    };
 
     return (
         <div>
             <div className="w-11/12 mx-auto py-2">
-                <p className="">  <a href="/categorias">Categoría</a> / Producto</p>
+                <p className=""><a href="/categorias">Categoría</a> / Producto</p>
             </div>
             <hr />
 
             <div className="w-11/12 mx-auto">
                 {productoData.map((producto) => (
                     <div key={producto.id} className="my-6 w-full px-2">
-                        {/* Título y botón */}
+                        {/* Título y botón del pedido */}
                         <div className="flex mb-4">
                             <h3 className="text-3xl font-bold text-justify pt-2 w-5/6">
                                 {producto.nombre}
                             </h3>
-                            <button className="w-1/6 bg-gray-200 ml-auto py-3 rounded-full transition-transform hover:scale-105 duration-300">
-                                img
-                            </button>
+
                         </div>
 
                         {/* Imagen */}
@@ -74,7 +81,10 @@ const Detalle: React.FC = () => {
                                         </p>
                                     )}
                                 </div>
-                                <button className="w-2/12 text-center rounded-full h-12 mt-1 text-3xl pb-2 font-bold bg-gray-200 transition-transform hover:scale-105 duration-300">
+                                <button 
+                                    onClick={() => agregarAlPedido(producto)}
+                                    className="w-2/12 text-center rounded-full h-12 mt-1 text-3xl pb-2 font-bold bg-gray-200 transition-transform hover:scale-105 duration-300"
+                                >
                                     +
                                 </button>
                             </div>
@@ -83,14 +93,13 @@ const Detalle: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* Especificaciones */}
+                        {/* Especificaciones (igual que antes) */}
                         {producto.especificacion && (
                             <section className="w-full mx-auto mt-6 p-2 pb-24">
                                 <h3 className="font-bold mb-3 text-xl">Especificaciones</h3>
                                 <table className="w-full border-collapse rounded-lg overflow-hidden ">
                                     <tbody >
                                         {(() => {
-                                            //Labels para renderizar nombres en las especificaciones
                                             const labelMap: Record<string, string> = {
                                                 marca: "Marca",
                                                 categoria: "Categoría",
@@ -104,13 +113,11 @@ const Detalle: React.FC = () => {
                                                 familia: "Familia",
                                             };
 
-                                            // Combinamos marca, categoría, acabado y especificaciones
                                             const allSpecs = {
                                                 ...producto.especificacion,
                                                 categoria: producto.categoria?.nombre ?? "Sin categoría",
                                                 acabado: producto.acabado?.nombre ?? "Sin acabado",
                                                 marca: producto.marca?.nombre ?? "Sin marca",
-
                                             };
 
                                             return Object.entries(allSpecs).map(([key, value], index) => {
@@ -125,7 +132,6 @@ const Detalle: React.FC = () => {
                                                                 {labelMap[key] ?? key}
                                                             </td>
                                                         </div>
-
                                                         <td className="py-2 text-center border-l-2 w-6/12 rounded-r-lg">{value as string}</td>
                                                     </tr>
                                                 );
@@ -135,17 +141,19 @@ const Detalle: React.FC = () => {
                                 </table>
                             </section>
                         )}
-
                     </div>
                 ))}
             </div>
 
+            {/* Modal del pedido */}
+            <ModalPedido 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+            />
 
             {/* Footer */}
             <Footer />
         </div>
-
-
     );
 };
 
