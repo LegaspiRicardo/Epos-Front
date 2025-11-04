@@ -1,5 +1,6 @@
 import React from "react";
 import type { Producto } from "../types/Producto";
+import Footer from '../components/Footer';
 
 // Datos simulados
 const productoData: Producto[] = [
@@ -139,34 +140,9 @@ const Detalle: React.FC = () => {
                 ))}
             </div>
 
-            <footer className="bg-cyan-950 text-white">
-                <div className="w-11/12 mx-auto pt-8">
-                    <div className="flex">
-                        <div className="w-3/6 ">
-                            <div className="flex mb-1">
-                                <img src="/logoepos.png" alt="" className="filter brightness-100" />
-                            </div>
-                            <p className="text-sm text-justify">Calidad y confianza en cada pieza.</p>
-                        </div>
-                        <div className="w-2/6 mt-4 ml-auto ">
-                            <h2 className="text-bold mb-2">Contacto</h2>
-                            <p className="text-sm">33 4343 3234</p>
-                            <p className="text-sm">33 4343 3234</p>
-                            <p className="text-sm">epos@gmail.com</p>
-                        </div>
-                    </div>
 
-                    <div className="mt-14">
-                        <h3 className="text-center mb-4">Redes sociales</h3>
-                        <div className="flex gap-16 w-10/12 mx-auto">
-                            <p className="w-2/6 text-center rounded-full"><img src="/icons/facebook.png" className="w-12" alt="Logotipo Facebook" /></p>
-                            <p className="w-2/6 text-center rounded-full"><img src="/icons/instagram.png" className="w-12" alt="Logotipo Instagram" /></p>
-                            <p className="w-2/6 text-center rounded-full"><img src="/icons/youtube.png" className="w-12" alt="Logotipo Youtube" /></p>
-                        </div>
-                    </div>
-                    <a href="https://portafolio-ricardo-legaspi.vercel.app/"><p className="text-center mt-8 text-xs">Made by RL </p></a>
-                </div>
-            </footer>
+            {/* Footer */}
+            <Footer />
         </div>
 
 

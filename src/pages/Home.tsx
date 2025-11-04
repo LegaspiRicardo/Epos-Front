@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import HomeCarousel from "../components/carousel/HomeCarousel";
+import Footer from '../components/Footer'; 
 
 // Definir los tipos para las direcciones
 type Direction = "up" | "down" | "left" | "right";
@@ -233,46 +234,7 @@ function HomePage() {
 
             {/* Footer */}
             <AnimatedSection delay={0.2} direction="up">
-                <footer className="bg-cyan-950 text-white">
-                    <div className="w-11/12 mx-auto pt-16">
-                        <div className="flex flex-col md:flex-row">
-                            <div className="w-full md:w-3/6 mb-6 md:mb-0">
-                                <div className="flex mb-4">
-                                    <div>
-                                        <img src="/logoepos.png" alt="EPOS Comercializadora Industrial" className="filter brightness-100 max-h-12" />
-                                        <p className="text-xs text-justify mb-2">
-                                            Calidad y confianza en cada pieza.
-                                        </p>
-                                    </div>
-                                    <div className="ml-auto">
-                                        <div className="w-full md:w-2/6 md:mt-4 md:ml-auto ml-auto">
-                                            <h2 className="font-bold">Contacto</h2>
-                                            <p className="text-sm mb-1">33 4343 3234</p>
-                                            <p className="text-sm mb-1">33 4343 3234</p>
-                                            <p className="text-sm mb-3">epos@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-14">
-                            <h3 className="text-center mb-4">Redes sociales</h3>
-                            <div className="flex justify-center gap-8 md:gap-16">
-                                {['facebook', 'instagram', 'youtube'].map((social, index) => (
-                                    <AnimatedSection key={social} delay={0.1 * index} direction="up">
-                                        <div className="w-12 h-12 flex items-center justify-center">
-                                            <img src={`/icons/${social}.png`} className="w-10" alt={`${social} EPOS`} />
-                                        </div>
-                                    </AnimatedSection>
-                                ))}
-                            </div>
-                        </div>
-                        <a href="https://portafolio-ricardo-legaspi.vercel.app/">
-                            <p className="text-center mt-8 text-xs pb-4">Made by RL</p>
-                        </a>
-                    </div>
-                </footer>
+                        <Footer />
             </AnimatedSection>
         </>
     );

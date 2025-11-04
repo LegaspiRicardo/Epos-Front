@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"; 
+import Footer from '../components/Footer';
 
 interface CardItem {
     id: number;
@@ -25,7 +26,7 @@ const Marcas: React.FC = () => {
             </div>
             <hr className="mb-4" />
 
-            <div className="grid grid-cols-2 bg-gray-200">
+            <div className="grid grid-cols-2 bg-gray-200 pb-16">
                 {cardData.map((card) => (
                     <div
                         key={card.id}
@@ -44,6 +45,8 @@ const Marcas: React.FC = () => {
                     </div>
                 ))}
             </div>
+            {/* Footer */}
+            <Footer />
         </div>
     );
 };

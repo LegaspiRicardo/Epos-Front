@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"; 
 import CategoriaTiendaCarousel from "../components/carousel/CategoriaTiendaCarousel";
 import MarcaTiendaCarousel from "../components/carousel/MarcaTiendaCarousel";
+import Footer from '../components/Footer';
 
 interface CardItem {
     id: number;
@@ -66,6 +67,8 @@ const Tienda: React.FC = () => {
                     ))}
                 </div>
             </div>
+            {/* Footer */}
+            <Footer />
         </div>
     );
 };
