@@ -45,7 +45,7 @@ const Tienda: React.FC = () => {
                 <MarcaTiendaCarousel />
             </div>
 
-            <div className="w-11/12 mx-auto mt-8">
+            <div className="md:w-8/12 w-11/12 mx-auto mt-8">
                 {/* CONTENEDOR SCROLLABLE */}
                 <div className="pb-4">
                     {cardData.map((card) => (

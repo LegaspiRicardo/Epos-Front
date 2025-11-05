@@ -9,7 +9,7 @@ const Layout = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-white overflow-x-hidden">
+        <div className="min-h-screen bg-white overflow-x-hidden overflow-y-hidden">
             <SuperiorBar />
             
             <div className="mx-auto w-full"> 

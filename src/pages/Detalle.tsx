@@ -1,4 +1,4 @@
-// Detalle.tsx (actualizado)
+// Detalle.tsx (corregido)
 import React, { useState } from "react";
 import type { Producto } from "../types/Producto";
 import Footer from '../components/Footer';
@@ -57,12 +57,11 @@ const Detalle: React.FC = () => {
                             <h3 className="text-3xl font-bold text-justify pt-2 w-5/6">
                                 {producto.nombre}
                             </h3>
-
                         </div>
 
                         {/* Imagen */}
-                        <div className="w-11/12 h-64 mx-auto bg-sky-100 rounded">
-                            <p className="text-center pt-28">Img</p>
+                        <div className=" w-11/12 md:py-48 py-32 mx-auto bg-sky-100 rounded">
+                            <p className="text-center md:pt-28 ">Img</p>
                         </div>
 
                         {/* Descripción y precio */}
@@ -93,12 +92,12 @@ const Detalle: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* Especificaciones (igual que antes) */}
+                        {/* Especificaciones CORREGIDO */}
                         {producto.especificacion && (
                             <section className="w-full mx-auto mt-6 p-2 pb-24">
                                 <h3 className="font-bold mb-3 text-xl">Especificaciones</h3>
-                                <table className="w-full border-collapse rounded-lg overflow-hidden ">
-                                    <tbody >
+                                <table className="w-full border-collapse rounded-lg overflow-hidden">
+                                    <tbody>
                                         {(() => {
                                             const labelMap: Record<string, string> = {
                                                 marca: "Marca",
@@ -127,12 +126,12 @@ const Detalle: React.FC = () => {
                                                         key={key}
                                                         className={`${index % 2 === 0 ? "bg-slate-100" : "bg-gray-300"}`}
                                                     >
-                                                        <div className="py-2 font-semibold w-full ml-2 rounded-l-lg h-8 ">
-                                                            <td className="rounded w-5/6 ">
-                                                                {labelMap[key] ?? key}
-                                                            </td>
-                                                        </div>
-                                                        <td className="py-2 text-center border-l-2 w-6/12 rounded-r-lg">{value as string}</td>
+                                                        <td className="py-2 font-semibold pl-4 rounded-l-lg w-1/2">
+                                                            {labelMap[key] ?? key}
+                                                        </td>
+                                                        <td className="py-2 text-center border-l-2 rounded-r-lg w-1/2">
+                                                            {value as string}
+                                                        </td>
                                                     </tr>
                                                 );
                                             });

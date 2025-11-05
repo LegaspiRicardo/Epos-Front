@@ -1,24 +1,45 @@
 // context/PedidoContext.tsx
-import type {ReactNode}  from "react";
+import type { ReactNode } from "react";
 import React, { createContext, useContext, useReducer } from "react";
 import type { Producto } from "../types/Producto";
-import type {  PedidoState } from "../types/Pedido";
+import type { PedidoState } from "../types/Pedido";
+
+// Definir la interfaz de Domicilio
+export interface Domicilio {
+  calle: string;
+  numeroExterior: string;
+  numeroInterior?: string;
+  colonia: string;
+  ciudad: string;
+  estado: string;
+  codigoPostal: string;
+  referencias: string;
+}
+
+// Extender el PedidoState para incluir domicilio
+export interface PedidoStateCompleto extends PedidoState {
+  domicilio?: Domicilio;
+}
 
 type PedidoAction =
   | { type: "AGREGAR_ITEM"; payload: Producto }
   | { type: "ELIMINAR_ITEM"; payload: number }
   | { type: "ACTUALIZAR_CANTIDAD"; payload: { id: number; cantidad: number } }
-  | { type: "LIMPIAR_PEDIDO" };
+  | { type: "LIMPIAR_PEDIDO" }
+  | { type: "AGREGAR_DOMICILIO"; payload: Domicilio }
+  | { type: "LIMPIAR_DOMICILIO" };
 
-const PedidoContext = createContext<{
-  pedido: PedidoState;
+interface PedidoContextType {
+  pedido: PedidoStateCompleto;
   dispatch: React.Dispatch<PedidoAction>;
-} | null>(null);
+}
+
+const PedidoContext = createContext<PedidoContextType | null>(null);
 
 const pedidoReducer = (
-  state: PedidoState,
+  state: PedidoStateCompleto,
   action: PedidoAction
-): PedidoState => {
+): PedidoStateCompleto => {
   switch (action.type) {
     case "AGREGAR_ITEM":
       const productoExistente = state.items.find(
@@ -76,10 +97,23 @@ const pedidoReducer = (
         total: state.total + itemActual.producto.precio * diferencia,
       };
 
+    case "AGREGAR_DOMICILIO":
+      return {
+        ...state,
+        domicilio: action.payload,
+      };
+
+    case "LIMPIAR_DOMICILIO":
+      return {
+        ...state,
+        domicilio: undefined,
+      };
+
     case "LIMPIAR_PEDIDO":
       return {
         items: [],
         total: 0,
+        domicilio: undefined,
       };
 
     default:
@@ -87,13 +121,16 @@ const pedidoReducer = (
   }
 };
 
+const initialState: PedidoStateCompleto = {
+  items: [],
+  total: 0,
+  domicilio: undefined,
+};
+
 export const PedidoProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [pedido, dispatch] = useReducer(pedidoReducer, {
-    items: [],
-    total: 0,
-  });
+  const [pedido, dispatch] = useReducer(pedidoReducer, initialState);
 
   return (
     <PedidoContext.Provider value={{ pedido, dispatch }}>
