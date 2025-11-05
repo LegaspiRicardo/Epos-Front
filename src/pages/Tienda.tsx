@@ -45,12 +45,12 @@ const Tienda: React.FC = () => {
                 <MarcaTiendaCarousel />
             </div>
 
-            <div className="md:w-8/12 w-11/12 mx-auto mt-8">
-                {/* CONTENEDOR SCROLLABLE */}
-                <div className="pb-4">
+            <div className="md:w-10/12 lg:w-8/12 w-11/12 mx-auto mt-8">
+                {/* CONTENEDOR GRID PARA 2 COLUMNAS EN DISPOSITIVOS GRANDES */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-4">
                     {cardData.map((card) => (
                         <Link to="/detalle" key={card.id}> 
-                            <div className="my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
+                            <div className="w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
                                 <div className="flex w-full">
                                     <div className="w-5/12 h-32 bg-slate-300">
                                         <p className="text-center pt-14">Img</p>

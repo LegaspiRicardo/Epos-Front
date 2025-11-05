@@ -85,9 +85,9 @@ const ModalPedido: React.FC<ModalPedidoProps> = ({ isOpen, onClose }) => {
                 {pedido.items.map((item) => (
                   <div
                     key={item.producto.id}
-                    className="flex items-center justify-between py-3 border-b"
+                    className="flex items-center justify-between py-3 border-b bg-gray-100/50 rounded-xl"
                   >
-                    <div className="w-4/12 md:h-40 h-32 mx-auto bg-sky-200 rounded">
+                    <div className="w-4/12 md:h-40 h-32 mx-auto bg-sky-100 rounded">
                       <p className="text-center md:pt-16 pt-12">Img</p>
                     </div>
                     <div className="w-7/12 mx-auto">
@@ -160,13 +160,13 @@ const ModalPedido: React.FC<ModalPedidoProps> = ({ isOpen, onClose }) => {
               <div className="flex space-x-2">
                 <button
                   onClick={limpiarPedido}
-                  className="flex-1 bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors"
+                  className="flex-1 border border-gray-500 text-gray-500 py-2 rounded hover:bg-gray-600 hover:text-white transition-colors"
                 >
-                  Limpiar Todo
+                  Cancelar
                 </button>
                 <button
                   onClick={handleContinuarCotizacion}
-                  className="flex-1 bg-cyan-950 text-white py-2 rounded hover:bg-cyan-800 transition-colors"
+                  className="flex-1 bg-cyan-800 text-white py-2 rounded hover:bg-cyan-900 transition-colors"
                 >
                   Continuar Cotización
                 </button>

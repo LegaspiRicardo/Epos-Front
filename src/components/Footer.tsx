@@ -8,15 +8,15 @@ const Footer = () => {
             <div className="w-11/12 mx-auto pt-16">
                 <div className="flex flex-col md:flex-row md:justify-between">
                     {/* Logo y descripción */}
-                    <div className="w-full md:w-full mb-6 md:mb-0">
+                    <div className="w-full md:w-full mb-6 md:mb-0 ">
                         <div className="flex flex-col md:flex-row md:items-start items-center">
-                            <div className="mb-4 md:mb-0 md:mr-8 w-3/6 mt-4">
+                            <div className="mb-4 md:mb-0 md:mr-8 w-3/6 mt-4 ">
                                 <img
                                     src="/logoepos.png"
                                     alt="EPOS Comercializadora Industrial"
-                                    className="filter brightness-100 max-h-16 w-auto mx-auto"
+                                    className="filter brightness-100 max-h-16 w-auto mx-auto md:ml-0"
                                 />
-                                <p className="text-xs text-center mt-2 max-w-md">
+                                <p className="text-xs text-center mt-2 max-w-md md:text-start">
                                     Calidad y confianza en cada pieza.
                                 </p>
                             </div>
