@@ -76,7 +76,7 @@ const ModalPedido: React.FC<ModalPedidoProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="flex mt-4 ml-auto">
-                      <p className="flex-item md:text-2xl  md:font-normal font-semibold">
+                      <p className="flex-item md:text-2xl md:font-normal font-semibold text-xs">
                         ${item.producto.precio}.00 MXN
                       </p>
                       <div className="flex items-center md:space-x-2 ml-auto ">

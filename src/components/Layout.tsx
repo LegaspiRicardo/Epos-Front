@@ -9,7 +9,7 @@ const Layout = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white overflow-x-hidden">
             <SuperiorBar />
             
             <div className="mx-auto w-full"> 
@@ -19,10 +19,10 @@ const Layout = () => {
             </div>
 
             {/* Botón flotante del pedido */}
-            <div className="fixed bottom-6 right-6 z-40">
+            <div className="fixed bottom-6 right-8 z-40">
                 <button 
                     onClick={() => setIsModalOpen(true)}
-                    className=" text-white p-4 rounded-full shadow-lg  transition-all duration-300 hover:scale-110"
+                    className=" text-white  rounded-full shadow-lg  transition-all duration-300 hover:scale-110"
                 >
                     <BotonPedido />
                 </button>
