@@ -162,7 +162,7 @@ const ModalPedido: React.FC<ModalPedidoProps> = ({ isOpen, onClose }) => {
                   onClick={limpiarPedido}
                   className="flex-1 border border-gray-500 text-gray-500 py-2 rounded hover:bg-gray-600 hover:text-white transition-colors"
                 >
-                  Cancelar
+                  Cancelar Pedido
                 </button>
                 <button
                   onClick={handleContinuarCotizacion}

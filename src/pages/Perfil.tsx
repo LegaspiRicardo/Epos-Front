@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from '../components/Footer';
 
 interface CardItem {
     id: number;
@@ -35,38 +36,37 @@ const cardData: CardItem[] = [
     { id: 14, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
     { id: 15, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
     { id: 16, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
-
 ];
 
 const cotizacionesData: Cotizacion[] = [
-    { 
-        id: 1, 
-        nombre: "Cotización Proyecto Industrial", 
-        fecha: "2024-01-15", 
-        estado: "en_proceso", 
-        enlaceDrive: "https://drive.google.com/...", 
-        total: 12500 
+    {
+        id: 1,
+        nombre: "Cotización Proyecto Industrial",
+        fecha: "2024-01-15",
+        estado: "en_proceso",
+        enlaceDrive: "https://drive.google.com/...",
+        total: 12500
     },
-    { 
-        id: 2, 
-        nombre: "Refacciones Taller Mecánico", 
-        fecha: "2024-01-10", 
-        estado: "pendiente", 
-        enlaceDrive: "https://drive.google.com/...", 
-        total: 8500 
+    {
+        id: 2,
+        nombre: "Refacciones Taller Mecánico",
+        fecha: "2024-01-10",
+        estado: "pendiente",
+        enlaceDrive: "https://drive.google.com/...",
+        total: 8500
     },
-    { 
-        id: 3, 
-        nombre: "Kit Mantenimiento Preventivo", 
-        fecha: "2024-01-05", 
-        estado: "completada", 
-        enlaceDrive: "https://drive.google.com/...", 
-        total: 23400 
+    {
+        id: 3,
+        nombre: "Kit Mantenimiento Preventivo",
+        fecha: "2024-01-05",
+        estado: "completada",
+        enlaceDrive: "https://drive.google.com/...",
+        total: 23400
     },
 ];
 
 const Perfil: React.FC = () => {
-    const [seccionActiva, setSeccionActiva] = useState<"pedidos" | "cotizaciones" | "favoritos">("favoritos");
+    const [seccionActiva, setSeccionActiva] = useState<"pedidos" | "domicilios" | "cotizaciones" | "favoritos">("favoritos");
 
     const getEstadoColor = (estado: string) => {
         switch (estado) {
@@ -87,54 +87,75 @@ const Perfil: React.FC = () => {
     };
 
     return (
-        <div>
-            <div className="w-11/12 mx-auto mt-2 py-2">
-                <p className="">Mi perfil</p>
+        <div className="">
+            <div className="w-full mt-2 bg-white">
+                <div className="w-9/12 mx-auto py-2">
+                    <p className="">Mi perfil</p>
+                </div>
             </div>
             <hr />
 
-            <div className="mx-auto">
-                <div className="flex w-11/12 mx-auto mt-4">
-                    <p className="bg-blue-200 text-8xl mx-auto pb-3 px-3 rounded-full">○</p>
-                    <div className="w-4/6 ml-auto pl-4 mt-2">
-                        <h2 className="text-xl font-bold mb-2">Lorem Ipsum Dolor</h2>
-                        <p>loremipsum@gmail.com</p>
-                        <p>+52 33 2343 2321</p>
+            <section>
+                <div className="sm:w-11/12 mx-auto w-full py-4">
+                    <div className="flex md:w-8/12 xl:w-4/12 w-11/12 mx-auto ">
+                        {/* IMAGEN */}
+                        <div className=" w-2/6">
+                            <p className="bg-blue-200 text-8xl text-center pb-3 md:px-3 md:w-8/12 mx-auto rounded-full">○</p>
+                        </div>
+                        {/* INFORMACIÓN CUENTA */}
+                        <div className="w-4/6 ml-auto pl-4 mt-2 md:mt-0 ">
+                            <div className="">
+                                <div className="flex">
+                                    <h2 className=" text-xl font-bold mt-2">Lorem Ipsum Dolor</h2>
+                                    <button className=" mx-auto rounded-xl  mt-2 p-2"><img src="/icons/lapiz.png" alt="Icono editar" className="w-6 h-6" /></button>
+                                </div>
+                                <p>loremipsum@gmail.com</p>
+                                <p>+52 33 2343 2321</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    {/* BOTONES EDIT PERFIL Y CERRAR SESION */}
+                    <div className="w-11/12 mx-auto md:w-8/12 xl:w-4/12">
+                        <button className="mt-6 w-full mx-auto border-red-600 border text-red-600 py-1 rounded-xl">Cerrar sesión</button>
                     </div>
                 </div>
-                <div className="mx-auto w-11/12">
-                    <button className="mt-6 w-full mx-auto bg-cyan-800 text-white py-1 rounded-xl">Editar perfil</button>
-                    <button className="mt-6 w-full mx-auto border-red-600 border text-red-600 py-1 rounded-xl">Cerrar sesión</button>
-                </div>
-            </div>
+
+            </section>
 
             {/* MENÚ DE NAVEGACIÓN */}
             <div className="w-full bg-gray-200 mt-6 py-2">
-                <div className="w-11/12 mx-auto flex text-center font-bold text-sm">
-                    <button 
+                <div className="md:w-9/12 w-full mx-auto flex text-center font-bold text-sm">
+                    <button
                         className={`w-2/6 py-2 ${seccionActiva === "pedidos" ? "bg-cyan-800 text-white rounded-lg" : ""}`}
                         onClick={() => setSeccionActiva("pedidos")}
                     >
-                        Mis Pedidos
+                        Pedidos
                     </button>
-                    <button 
+                    <button
                         className={`w-2/6 py-2 ${seccionActiva === "cotizaciones" ? "bg-cyan-800 text-white rounded-lg" : ""}`}
                         onClick={() => setSeccionActiva("cotizaciones")}
                     >
-                        Mis Cotizaciones
+                        Cotizaciones
                     </button>
-                    <button 
+                    <button
                         className={`w-2/6 py-2 ${seccionActiva === "favoritos" ? "bg-cyan-800 text-white rounded-lg" : ""}`}
                         onClick={() => setSeccionActiva("favoritos")}
                     >
                         Favoritos
                     </button>
+                    <button
+                        className={`w-2/6 py-2 ${seccionActiva === "domicilios" ? "bg-cyan-800 text-white rounded-lg" : ""}`}
+                        onClick={() => setSeccionActiva("domicilios")}
+                    >
+                        Domicilios
+                    </button>
                 </div>
             </div>
 
             {/* CONTENIDO DINÁMICO */}
-            <div className="w-11/12 mx-auto mt-8 h-96 overflow-y-auto overflow-x-hidden">
-                
+            <div className="md:w-9/12 w-11/12 mx-auto md:max-h-[900px] max-h-[500px] mt-8 overflow-y-auto overflow-x-hidden mb-24">
+
                 {/* SECCIÓN COTIZACIONES */}
                 {seccionActiva === "cotizaciones" && (
                     <div className="pb-4">
@@ -146,15 +167,15 @@ const Perfil: React.FC = () => {
                                         {getEstadoTexto(cotizacion.estado)}
                                     </span>
                                 </div>
-                                
+
                                 <div className="flex justify-between items-center text-sm text-gray-600 mb-3">
                                     <p>Fecha: {cotizacion.fecha}</p>
                                     <p className="text-lg font-bold text-cyan-800">${cotizacion.total.toLocaleString()} MXN</p>
                                 </div>
-                                
+
                                 <div className="flex justify-between items-center">
                                     <span className="text-xs text-gray-500">ID: #{cotizacion.id}</span>
-                                    <a 
+                                    <a
                                         href={cotizacion.enlaceDrive}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -168,33 +189,35 @@ const Perfil: React.FC = () => {
                     </div>
                 )}
 
-                {/* SECCIÓN FAVORITOS (tu contenido original) */}
+                {/* SECCIÓN FAVORITOS  */}
                 {seccionActiva === "favoritos" && (
-                    <div className="pb-4">
-                        {cardData.map((card) => (
-                            <a href="/detalle" key={card.id}>
-                                <div className="my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
-                                    <div className="flex w-full">
-                                        <div className="w-5/12 h-32 bg-slate-300">
-                                            <p className="text-center pt-14">Img</p>
-                                        </div>
-                                        <div className="w-7/12 ml-4">
-                                            <div className="flex">
-                                                <h3 className="text-xl font-semibold mb-1 w-4/6 text-justify">{card.nombre}</h3>
-                                                <p className="mx-auto rounded-full px-2 pt-1 bg-slate-500">⭐</p>
+                    <div className="pb-4  ">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {cardData.map((card) => (
+                                <a href="/detalle" key={card.id}>
+                                    <div className="my-4 w-full bg-cyan-900 text-white shadow-lg py-5 px-2 transition-transform hover:scale-105 duration-300">
+                                        <div className="flex w-full">
+                                            <div className="w-5/12 h-32 bg-slate-300">
+                                                <p className="text-center pt-14">Img</p>
                                             </div>
-                                            <p className="text-xs">{card.descripcion}</p>
-                                            <p className="text-xs mb-1">Acabado: {card.acabado}</p>
-                                            <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
+                                            <div className="w-7/12 ml-4">
+                                                <div className="flex">
+                                                    <h3 className="text-xl font-semibold mb-1 w-4/6 text-justify">{card.nombre}</h3>
+                                                    <p className="mx-auto rounded-full px-2 pt-1 bg-slate-500">⭐</p>
+                                                </div>
+                                                <p className="text-xs">{card.descripcion}</p>
+                                                <p className="text-xs mb-1">Acabado: {card.acabado}</p>
+                                                <p className="mt-6 text-2xl">${card.precio}.00 MXN</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        ))}
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 )}
 
-                {/* SECCIÓN PEDIDOS (puedes agregarla después) */}
+                {/* SECCIÓN PEDIDOS  */}
                 {seccionActiva === "pedidos" && (
                     <div className="pb-4">
                         <div className="text-center py-8 text-gray-500">
@@ -203,7 +226,19 @@ const Perfil: React.FC = () => {
                         </div>
                     </div>
                 )}
+
+                {/* SECCIÓN DOMICILIOS  */}
+                {seccionActiva === "domicilios" && (
+                    <div className="pb-4">
+                        <div className="text-center py-8 text-gray-500">
+                            <p className="text-lg">Próximamente...</p>
+                            <p className="text-sm">Tus domicilios aparecerán aquí</p>
+                        </div>
+                    </div>
+                )}
             </div>
+            {/* Footer */}
+            <Footer />
         </div>
     );
 };
