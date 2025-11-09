@@ -884,7 +884,7 @@ const Productos = () => {
 
                 {/* Tabla */}
                 <table className="w-full border border-gray-500">
-                    <thead className="bg-cyan-800 text-white border border-gray-500 h-10 text-xs lg:text-md xl:text-base">
+                    <thead className="bg-cyan-900 text-white border border-gray-500 h-10 text-xs lg:text-md xl:text-base">
                         <tr>
                             <th scope="col" className="border border-gray-500 bg-gray-700 px-2 py-1">
                                 <div className="flex items-center justify-between">
