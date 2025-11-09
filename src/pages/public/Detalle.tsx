@@ -14,7 +14,7 @@ const productoData: Producto[] = [
         precio: 150,
         stock: 10,
         img: "img",
-        status: "activo",
+        status: "existente",
         id_marca: 1,
         id_categoria: 1,
         id_acabado: 1,
