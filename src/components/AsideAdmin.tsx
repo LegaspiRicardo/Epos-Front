@@ -7,11 +7,11 @@ const AsideAdmin: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const menuItems = [
-        { path: '/admin', label: 'Dashboard', icon: '📊' },
-        { path: '/admin/productos', label: 'Productos', icon: '📦' },
-        { path: '/admin/clientes', label: 'Clientes', icon: '👥' },
-        { path: '/admin/analisis', label: 'Análisis', icon: '📈' },
-        { path: '/admin/perfil', label: 'Mi Perfil', icon: '👤' },
+        { path: '/admin', label: 'Dashboard', icon: '/icons/gestion.png' },
+        { path: '/admin/productos', label: 'Productos', icon: '/icons/producto.png' },
+        { path: '/admin/clientes', label: 'Clientes', icon: '/icons/cliente.png' },
+        { path: '/admin/analisis', label: 'Análisis', icon: '/icons/grafica.png' },
+        { path: '/admin/perfil', label: 'Mi Cuenta', icon: '/icons/usuario.png' },
     ];
 
     const isActive = (path: string) => {
@@ -67,11 +67,22 @@ const AsideAdmin: React.FC = () => {
                                     to={item.path}
                                     onClick={closeMenu}
                                     className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${isActive(item.path)
-                                        ? 'bg-white text-cyan-950 shadow-lg'
+                                        ? 'bg-gray-500 text-white shadow-lg'
                                         : 'text-gray-300 hover:bg-gray-700 hover:text-white'
                                         }`}
                                 >
-                                    <span className="text-lg">{item.icon}</span>
+                                    <span className="text-lg w-5 h-5 flex items-center justify-center">
+                                        {item.icon.includes('/') ? (
+                                            // Es una imagen
+                                            <img 
+                                                src={item.icon} 
+                                                alt="" 
+                                                className="w-full h-full object-contain"
+                                            />
+                                        ) : (
+                                            item.icon
+                                        )}
+                                    </span>
                                     <span className="font-medium">{item.label}</span>
                                 </Link>
                             </li>
@@ -86,7 +97,6 @@ const AsideAdmin: React.FC = () => {
                         onClick={closeMenu}
                         className="flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
                     >
-                        <span className="text-lg">🏠</span>
                         <span className="font-medium">Volver al Sitio</span>
                     </Link>
                 </div>

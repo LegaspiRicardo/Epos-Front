@@ -267,7 +267,7 @@ const ProductoModal: React.FC<ProductoModalProps> = ({
                             onClick={handleEdit}
                             className="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-cyan-900 transition-colors flex items-center gap-2"
                         >
-                            <span>✏️</span>
+                            <span><img src="/icons/lapizblanco.png" alt="" className='w-4'/></span>
                             Editar Producto
                         </button>
                     </div>

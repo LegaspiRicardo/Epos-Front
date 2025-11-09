@@ -876,7 +876,7 @@ const Productos = () => {
                                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-950 focus:border-transparent"
                             />
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                🔍
+                                <img src="/icons/lupanegra.png" alt="" className='w-4'/>
                             </span>
                         </div>
                     </div>
@@ -884,9 +884,9 @@ const Productos = () => {
 
                 {/* Tabla */}
                 <table className="w-full border border-gray-500">
-                    <thead className="bg-blue-200/50 h-10">
+                    <thead className="bg-cyan-800 text-white border border-gray-500 h-10 text-xs lg:text-md xl:text-base">
                         <tr>
-                            <th scope="col" className="border border-gray-500 bg-slate-300 px-2 py-1">
+                            <th scope="col" className="border border-gray-500 bg-gray-700 px-2 py-1">
                                 <div className="flex items-center justify-between">
                                     ID
                                     <button
@@ -985,7 +985,7 @@ const Productos = () => {
                         </tr>
                     </thead>
 
-                    <tbody className="text-center border border-gray-500">
+                    <tbody className="text-center text-xs lg:text-md xl:text-base border border-gray-500">
                         {currentItems.map((producto) => (
                             <tr
                                 key={producto.id}
@@ -994,7 +994,7 @@ const Productos = () => {
                             >
                                 <th scope="row" className="border border-gray-500">{producto.id}</th>
                                 <td className="border border-gray-500">{producto.nombre}</td>
-                                <td className="border border-gray-500">{producto.descripcion}</td>
+                                <td className="border border-gray-500 md:text-center text-justify">{producto.descripcion}</td>
                                 <td className="border border-gray-500">
                                     {producto.especificacion?.uso || 'No especificado'}
                                 </td>
