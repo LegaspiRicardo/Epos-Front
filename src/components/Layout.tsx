@@ -2,8 +2,8 @@
 import  { useState } from 'react';
 import { Outlet } from "react-router-dom";
 import SuperiorBar from "./SuperiorBar";
-import BotonPedido from './BotonPedido';
-import ModalPedido from './ModalPedido';
+import BotonPedido from './Buttons/BotonPedido';
+import ModalPedido from './modals/ModalPedido';
 
 const Layout = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);

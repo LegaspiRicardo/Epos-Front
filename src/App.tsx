@@ -1,16 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Home from "./pages/Home";
-import Categorias from "./pages/Categorias";
-import Marcas from "./pages/Marcas";
-import Acabados from "./pages/Acabados";
-import Tienda from "./pages/Tienda";
-import Perfil from "./pages/Perfil";
-import Detalle from "./pages/Detalle";
+//PUBLIC
+import Home from "./pages/public/Home";
+import Categorias from "./pages/public/Categorias";
+import Marcas from "./pages/public/Marcas";
+import Acabados from "./pages/public/Acabados";
+import Tienda from "./pages/public/Tienda";
+import Perfil from "./pages/public/Perfil";
+import Detalle from "./pages/public/Detalle";
+
+
 
 import { PedidoProvider } from './context/PedidoContext';
 import Layout from "./components/Layout";
+
+
+
+
+//ADMIN
+import LayoutAdmin from "./components/LayoutAdmin";
+import Dashboard from "./pages/admin/Dashboard";
+import Productos from "./pages/admin/Productos";
+import Clientes from "./pages/admin/Clientes";
+import Analisis from "./pages/admin/Analisis";
+import PerfilAdmin from "./pages/admin/Perfil";
+
+
+
 
 function App() {
   return (
@@ -27,6 +44,17 @@ function App() {
             <Route path="perfil" element={<Perfil />} />
             <Route path="detalle" element={<Detalle />} />
           </Route>
+
+          <Route path="/admin" element={<LayoutAdmin />}>
+            <Route index element={<Dashboard />} />
+            <Route path="productos" element={<Productos />} />
+            <Route path="clientes" element={<Clientes />} />
+            <Route path="analisis" element={<Analisis />} />
+            <Route path="perfil" element={<PerfilAdmin />} />
+
+          </Route>
+
+
         </Routes>
       </Router>
     </PedidoProvider>
