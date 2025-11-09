@@ -25,7 +25,7 @@ import Productos from "./pages/admin/Productos";
 import Clientes from "./pages/admin/Clientes";
 import Analisis from "./pages/admin/Analisis";
 import PerfilAdmin from "./pages/admin/Perfil";
-
+import CMA from "./pages/admin/CMA";
 
 
 
@@ -51,7 +51,9 @@ function App() {
             <Route path="clientes" element={<Clientes />} />
             <Route path="analisis" element={<Analisis />} />
             <Route path="perfil" element={<PerfilAdmin />} />
-
+            <Route path="acabados" element={<CMA />} />
+            <Route path="categorias" element={<CMA />} />
+            <Route path="marcas" element={<CMA />} />
           </Route>
 
 
