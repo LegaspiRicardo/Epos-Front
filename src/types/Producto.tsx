@@ -10,7 +10,7 @@ export interface Producto {
     precio: number;
     stock: number;
     img?: string;
-    status: "activo" | "inactivo";
+    status: 'existente' | 'inexistente' | 'revisar disp';
     id_marca: number;
     id_categoria: number;
     id_acabado: number;

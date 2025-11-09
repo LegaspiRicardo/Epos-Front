@@ -11,6 +11,7 @@ const LayoutAdmin = () => {
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 <main className="flex-1 bg-white p-6 overflow-auto">
+                    <h1 className="text-3xl font-bold mb-4">Dashboard Admin</h1>
                     <Outlet />
                 </main>
             </div>
