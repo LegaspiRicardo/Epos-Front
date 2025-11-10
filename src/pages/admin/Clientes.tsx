@@ -1,16 +1,513 @@
 // src/pages/admin/Clientes.tsx
 import { useState, useMemo } from "react";
+import type { User } from "../../types/User";
+import ClienteDetailModal from "../../components/modals/ClienteDetailModal";
 
-interface Usuario {
-  id: number;
-  nombre: string;
-  apellidos: string;
-  email: string;
-  telefono: string;
-  tipo: "registrado" | "cliente";
-  fechaRegistro: string;
-  ultimoPedido?: string;
-}
+// Datos de ejemplo (puedes moverlos a un archivo separado después)
+const usuarios: User[] =[
+  {
+    id: 1,
+    nombre: "Ana",
+    apellidos: "García Martínez",
+    email: "ana.garcia@email.com",
+    telefono: "555-123-4567",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-15",
+    ultimoPedido: "2024-03-20",
+    pedidosRealizados: 12,
+    totalGastado: 24500,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Revolución",
+        numero: "123",
+        colonia: "Centro",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06000",
+        referencias: "Frente al banco BBVA",
+        tipo: "casa",
+        principal: true
+      },
+      {
+        id: 2,
+        calle: "Calle Morelos",
+        numero: "45",
+        colonia: "Industrial",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06500",
+        referencias: "Edificio blanco, piso 3",
+        tipo: "trabajo",
+        principal: false
+      }
+    ]
+  },
+  {
+    id: 2,
+    nombre: "Carlos",
+    apellidos: "Rodríguez López",
+    email: "carlos.rodriguez@email.com",
+    telefono: "555-987-6543",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-20",
+    ultimoPedido: "2024-03-18",
+    pedidosRealizados: 8,
+    totalGastado: 18750,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Juárez",
+        numero: "789",
+        colonia: "Del Valle",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "03100",
+        referencias: "Esquina con Av. Insurgentes",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 3,
+    nombre: "María",
+    apellidos: "Hernández González",
+    email: "maria.hernandez@email.com",
+    telefono: "555-456-7890",
+    status: "activo",
+    rol: "registrado",
+    fechaRegistro: "2024-02-10",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 4,
+    nombre: "José",
+    apellidos: "Martínez Sánchez",
+    email: "jose.martinez@email.com",
+    telefono: "555-234-5678",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-02-15",
+    ultimoPedido: "2024-03-15",
+    pedidosRealizados: 15,
+    totalGastado: 32500,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Chapultepec",
+        numero: "456",
+        colonia: "Roma Norte",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06700",
+        referencias: "Cerca del metro Insurgentes",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 5,
+    nombre: "Laura",
+    apellidos: "Díaz Ramírez",
+    email: "laura.diaz@email.com",
+    telefono: "555-345-6789",
+    status: "inactivo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-05",
+    ultimoPedido: "2024-02-28",
+    pedidosRealizados: 5,
+    totalGastado: 8900,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Durango",
+        numero: "234",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06140",
+        referencias: "Frente al parque México",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 6,
+    nombre: "Miguel",
+    apellidos: "Torres Flores",
+    email: "miguel.torres@email.com",
+    telefono: "555-567-8901",
+    status: "activo",
+    rol: "registrado",
+    fechaRegistro: "2024-03-01",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 7,
+    nombre: "Elena",
+    apellidos: "Vargas Castro",
+    email: "elena.vargas@email.com",
+    telefono: "555-678-9012",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-30",
+    ultimoPedido: "2024-03-19",
+    pedidosRealizados: 20,
+    totalGastado: 45200,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Patriotismo",
+        numero: "567",
+        colonia: "San Pedro de los Pinos",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "03800",
+        referencias: "Casa color azul",
+        tipo: "casa",
+        principal: true
+      },
+      {
+        id: 2,
+        calle: "Av. Universidad",
+        numero: "1200",
+        colonia: "Copilco",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "04360",
+        referencias: "Departamento 504",
+        tipo: "otro",
+        principal: false
+      }
+    ]
+  },
+  {
+    id: 8,
+    nombre: "Fernando",
+    apellidos: "Morales Ruiz",
+    email: "fernando.morales@email.com",
+    telefono: "555-789-0123",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-02-22",
+    ultimoPedido: "2024-03-17",
+    pedidosRealizados: 3,
+    totalGastado: 6700,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Coahuila",
+        numero: "89",
+        colonia: "Roma Sur",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06760",
+        referencias: "Entre Durango y Colima",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 9,
+    nombre: "Sofia",
+    apellidos: "Cruz Mendoza",
+    email: "sofia.cruz@email.com",
+    telefono: "555-890-1234",
+    status: "inactivo",
+    rol: "registrado",
+    fechaRegistro: "2024-02-28",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 10,
+    nombre: "Ricardo",
+    apellidos: "Ortiz Silva",
+    email: "ricardo.ortiz@email.com",
+    telefono: "555-901-2345",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-12",
+    ultimoPedido: "2024-03-21",
+    pedidosRealizados: 25,
+    totalGastado: 58700,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Mazatlán",
+        numero: "345",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06170",
+        referencias: "Casa con portón negro",
+        tipo: "casa",
+        principal: true
+      },
+      {
+        id: 2,
+        calle: "Av. Tamaulipas",
+        numero: "678",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06170",
+        referencias: "Oficina 203",
+        tipo: "trabajo",
+        principal: false
+      }
+    ]
+  },
+  {
+    id: 11,
+    nombre: "Gabriela",
+    apellidos: "Rios Navarro",
+    email: "gabriela.rios@email.com",
+    telefono: "555-012-3456",
+    status: "activo",
+    rol: "registrado",
+    fechaRegistro: "2024-03-05",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 12,
+    nombre: "Alejandro",
+    apellidos: "Mendoza Pérez",
+    email: "alejandro.mendoza@email.com",
+    telefono: "555-123-7890",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-08",
+    ultimoPedido: "2024-03-16",
+    pedidosRealizados: 18,
+    totalGastado: 41200,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Oaxaca",
+        numero: "156",
+        colonia: "Roma Norte",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06700",
+        referencias: "Edificio de departamentos",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 13,
+    nombre: "Patricia",
+    apellidos: "Lara Guzmán",
+    email: "patricia.lara@email.com",
+    telefono: "555-234-8901",
+    status: "inactivo",
+    rol: "cliente",
+    fechaRegistro: "2024-02-05",
+    ultimoPedido: "2024-02-20",
+    pedidosRealizados: 2,
+    totalGastado: 4500,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Yucatán",
+        numero: "267",
+        colonia: "Roma Sur",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06760",
+        referencias: "Casa color rosa",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 14,
+    nombre: "Roberto",
+    apellidos: "Soto Jiménez",
+    email: "roberto.soto@email.com",
+    telefono: "555-345-9012",
+    status: "activo",
+    rol: "registrado",
+    fechaRegistro: "2024-03-10",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 15,
+    nombre: "Carmen",
+    apellidos: "Castillo Vega",
+    email: "carmen.castillo@email.com",
+    telefono: "555-456-0123",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-25",
+    ultimoPedido: "2024-03-22",
+    pedidosRealizados: 30,
+    totalGastado: 72300,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Álvaro Obregón",
+        numero: "789",
+        colonia: "Roma Norte",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06700",
+        referencias: "Local comercial",
+        tipo: "trabajo",
+        principal: true
+      },
+      {
+        id: 2,
+        calle: "Calle Colima",
+        numero: "123",
+        colonia: "Roma Norte",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06700",
+        referencias: "Departamento 201",
+        tipo: "casa",
+        principal: false
+      }
+    ]
+  },
+  {
+    id: 16,
+    nombre: "Javier",
+    apellidos: "Romero Herrera",
+    email: "javier.romero@email.com",
+    telefono: "555-567-1234",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-02-18",
+    ultimoPedido: "2024-03-14",
+    pedidosRealizados: 7,
+    totalGastado: 15600,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Zacatecas",
+        numero: "345",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06140",
+        referencias: "Casa con jardín",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 17,
+    nombre: "Diana",
+    apellidos: "Meza Ortega",
+    email: "diana.meza@email.com",
+    telefono: "555-678-2345",
+    status: "inactivo",
+    rol: "registrado",
+    fechaRegistro: "2024-03-03",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 18,
+    nombre: "Oscar",
+    apellidos: "Reyes Delgado",
+    email: "oscar.reyes@email.com",
+    telefono: "555-789-3456",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-01-18",
+    ultimoPedido: "2024-03-23",
+    pedidosRealizados: 22,
+    totalGastado: 49800,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Av. Michoacán",
+        numero: "456",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06170",
+        referencias: "Esquina con Nuevo León",
+        tipo: "casa",
+        principal: true
+      }
+    ]
+  },
+  {
+    id: 19,
+    nombre: "Teresa",
+    apellidos: "Acosta Medina",
+    email: "teresa.acosta@email.com",
+    telefono: "555-890-4567",
+    status: "activo",
+    rol: "registrado",
+    fechaRegistro: "2024-03-08",
+    pedidosRealizados: 0,
+    totalGastado: 0,
+    domicilios: []
+  },
+  {
+    id: 20,
+    nombre: "Luis",
+    apellidos: "Campos Rojas",
+    email: "luis.campos@email.com",
+    telefono: "555-901-5678",
+    status: "activo",
+    rol: "cliente",
+    fechaRegistro: "2024-02-14",
+    ultimoPedido: "2024-03-24",
+    pedidosRealizados: 9,
+    totalGastado: 21300,
+    domicilios: [
+      {
+        id: 1,
+        calle: "Calle Sonora",
+        numero: "189",
+        colonia: "Hipódromo",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06100",
+        referencias: "Cerca del hipódromo",
+        tipo: "casa",
+        principal: true
+      },
+      {
+        id: 2,
+        calle: "Av. Veracruz",
+        numero: "234",
+        colonia: "Condesa",
+        ciudad: "Ciudad de México",
+        estado: "CDMX",
+        codigoPostal: "06170",
+        referencias: "Oficina 501",
+        tipo: "trabajo",
+        principal: false
+      }
+    ]
+  }
+];
 
 const Clientes = () => {
   // Estados independientes para cada tabla
@@ -25,297 +522,20 @@ const Clientes = () => {
   
   const [currentPageClientes, setCurrentPageClientes] = useState(1);
   const [currentPageRegistrados, setCurrentPageRegistrados] = useState(1);
+  const [selectedCliente, setSelectedCliente] = useState<User | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const itemsPerPage = 8;
 
-  const usuarios: Usuario[] = [
-    {
-      id: 1,
-      nombre: "Hermenegildo Abraham",
-      apellidos: "Zeferino Morales",
-      email: "zefeheab@gmail.com",
-      telefono: "3354864512",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-15",
-      ultimoPedido: "2024-03-20",
-    },
-    {
-      id: 2,
-      nombre: "María",
-      apellidos: "García López",
-      email: "maria.garcia@email.com",
-      telefono: "3354864513",
-      tipo: "registrado",
-      fechaRegistro: "2024-02-10",
-    },
-    {
-      id: 3,
-      nombre: "Carlos",
-      apellidos: "Rodríguez Pérez",
-      email: "carlos.rodriguez@email.com",
-      telefono: "3354864514",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-20",
-      ultimoPedido: "2024-03-18",
-    },
-    {
-      id: 4,
-      nombre: "Ana",
-      apellidos: "Martínez Sánchez",
-      email: "ana.martinez@email.com",
-      telefono: "3354864515",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-05",
-      ultimoPedido: "2024-03-22",
-    },
-    {
-      id: 5,
-      nombre: "Javier",
-      apellidos: "Hernández González",
-      email: "javier.hernandez@email.com",
-      telefono: "3354864516",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-01",
-    },
-    {
-      id: 6,
-      nombre: "Laura",
-      apellidos: "Díaz Castro",
-      email: "laura.diaz@email.com",
-      telefono: "3354864517",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-30",
-      ultimoPedido: "2024-03-15",
-    },
-    {
-      id: 7,
-      nombre: "Miguel",
-      apellidos: "Torres Ramírez",
-      email: "miguel.torres@email.com",
-      telefono: "3354864518",
-      tipo: "registrado",
-      fechaRegistro: "2024-02-28",
-    },
-    {
-      id: 8,
-      nombre: "Elena",
-      apellidos: "Flores Ortega",
-      email: "elena.flores@email.com",
-      telefono: "3354864519",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-14",
-      ultimoPedido: "2024-03-25",
-    },
-    {
-      id: 9,
-      nombre: "Roberto",
-      apellidos: "Vargas Mendoza",
-      email: "roberto.vargas@email.com",
-      telefono: "3354864520",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-10",
-    },
-    {
-      id: 10,
-      nombre: "Sofía",
-      apellidos: "Ríos Navarro",
-      email: "sofia.rios@email.com",
-      telefono: "3354864521",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-25",
-      ultimoPedido: "2024-03-19",
-    },
-    {
-      id: 11,
-      nombre: "Diego",
-      apellidos: "Silva Romero",
-      email: "diego.silva@email.com",
-      telefono: "3354864522",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-08",
-      ultimoPedido: "2024-03-21",
-    },
-    {
-      id: 12,
-      nombre: "Patricia",
-      apellidos: "Molina Herrera",
-      email: "patricia.molina@email.com",
-      telefono: "3354864523",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-05",
-    },
-    {
-      id: 13,
-      nombre: "Fernando",
-      apellidos: "Cruz Domínguez",
-      email: "fernando.cruz@email.com",
-      telefono: "3354864524",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-18",
-      ultimoPedido: "2024-03-16",
-    },
-    {
-      id: 14,
-      nombre: "Gabriela",
-      apellidos: "Reyes Paredes",
-      email: "gabriela.reyes@email.com",
-      telefono: "3354864525",
-      tipo: "registrado",
-      fechaRegistro: "2024-02-22",
-    },
-    {
-      id: 15,
-      nombre: "Ricardo",
-      apellidos: "Ortiz Campos",
-      email: "ricardo.ortiz@email.com",
-      telefono: "3354864526",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-12",
-      ultimoPedido: "2024-03-24",
-    },
-    {
-      id: 16,
-      nombre: "Isabel",
-      apellidos: "Guerrero Vega",
-      email: "isabel.guerrero@email.com",
-      telefono: "3354864527",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-08",
-    },
-    {
-      id: 17,
-      nombre: "Oscar",
-      apellidos: "Nuñez Rojas",
-      email: "oscar.nunez@email.com",
-      telefono: "3354864528",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-28",
-      ultimoPedido: "2024-03-17",
-    },
-    {
-      id: 18,
-      nombre: "Carmen",
-      apellidos: "Medina Fuentes",
-      email: "carmen.medina@email.com",
-      telefono: "3354864529",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-17",
-      ultimoPedido: "2024-03-23",
-    },
-    {
-      id: 19,
-      nombre: "Héctor",
-      apellidos: "Santos León",
-      email: "hector.santos@email.com",
-      telefono: "3354864530",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-12",
-    },
-    {
-      id: 20,
-      nombre: "Adriana",
-      apellidos: "Castillo Mora",
-      email: "adriana.castillo@email.com",
-      telefono: "3354864531",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-03",
-      ultimoPedido: "2024-03-26",
-    },
-    {
-      id: 21,
-      nombre: "Raúl",
-      apellidos: "Lara Salazar",
-      email: "raul.lara@email.com",
-      telefono: "3354864532",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-15",
-    },
-    {
-      id: 22,
-      nombre: "Teresa",
-      apellidos: "Cortés Espinoza",
-      email: "teresa.cortes@email.com",
-      telefono: "3354864533",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-22",
-      ultimoPedido: "2024-03-14",
-    },
-    {
-      id: 23,
-      nombre: "Francisco",
-      apellidos: "Mejía Cordero",
-      email: "francisco.mejia@email.com",
-      telefono: "3354864534",
-      tipo: "registrado",
-      fechaRegistro: "2024-02-25",
-    },
-    {
-      id: 24,
-      nombre: "Lucía",
-      apellidos: "Peña Valdez",
-      email: "lucia.pena@email.com",
-      telefono: "3354864535",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-09",
-      ultimoPedido: "2024-03-27",
-    },
-    {
-      id: 25,
-      nombre: "Arturo",
-      apellidos: "Delgado Ríos",
-      email: "arturo.delgado@email.com",
-      telefono: "3354864536",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-03",
-    },
-    {
-      id: 26,
-      nombre: "Rosa",
-      apellidos: "Vega Montes",
-      email: "rosa.vega@email.com",
-      telefono: "3354864537",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-17",
-      ultimoPedido: "2024-03-13",
-    },
-    {
-      id: 27,
-      nombre: "Manuel",
-      apellidos: "Cabrera Ponce",
-      email: "manuel.cabrera@email.com",
-      telefono: "3354864538",
-      tipo: "registrado",
-      fechaRegistro: "2024-02-19",
-    },
-    {
-      id: 28,
-      nombre: "Verónica",
-      apellidos: "Miranda Solís",
-      email: "veronica.miranda@email.com",
-      telefono: "3354864539",
-      tipo: "cliente",
-      fechaRegistro: "2024-02-11",
-      ultimoPedido: "2024-03-28",
-    },
-    {
-      id: 29,
-      nombre: "Alberto",
-      apellidos: "Rangel Serrano",
-      email: "alberto.rangel@email.com",
-      telefono: "3354864540",
-      tipo: "registrado",
-      fechaRegistro: "2024-03-07",
-    },
-    {
-      id: 30,
-      nombre: "Daniela",
-      apellidos: "Escamilla Gallegos",
-      email: "daniela.escamilla@email.com",
-      telefono: "3354864541",
-      tipo: "cliente",
-      fechaRegistro: "2024-01-19",
-      ultimoPedido: "2024-03-29",
-    },
-  ];
+  const handleClienteClick = (cliente: User) => {
+    setSelectedCliente(cliente);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCliente(null);
+  };
 
   const handleSortClientes = (key: string) => {
     let direction: "asc" | "desc" = "asc";
@@ -341,12 +561,12 @@ const Clientes = () => {
     setSortConfigRegistrados({ key, direction });
   };
 
-  const sortItems = (items: Usuario[], sortConfig: { key: string; direction: "asc" | "desc" } | null) => {
+  const sortItems = (items: User[], sortConfig: { key: string; direction: "asc" | "desc" } | null) => {
     if (!sortConfig) return items;
 
     return [...items].sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof Usuario];
-      const bValue = b[sortConfig.key as keyof Usuario];
+      const aValue = a[sortConfig.key as keyof User];
+      const bValue = b[sortConfig.key as keyof User];
 
       // Manejar valores undefined o null
       if (aValue == null && bValue == null) return 0;
@@ -389,17 +609,18 @@ const Clientes = () => {
     });
   };
 
+  // CORRECCIÓN: Usar el campo 'tipo' en lugar de 'rol'
   const sortedUsuariosClientes = useMemo(() => {
-    const clientes = usuarios.filter(user => user.tipo === "cliente");
+    const clientes = usuarios.filter(user => user.rol === "cliente");
     return sortItems(clientes, sortConfigClientes);
-  }, [usuarios, sortConfigClientes]);
+  }, [sortConfigClientes]);
 
   const sortedUsuariosRegistrados = useMemo(() => {
-    const registrados = usuarios.filter(user => user.tipo === "registrado");
+    const registrados = usuarios.filter(user => user.rol === "registrado");
     return sortItems(registrados, sortConfigRegistrados);
-  }, [usuarios, sortConfigRegistrados]);
+  }, [sortConfigRegistrados]);
 
-  const getCurrentItems = (items: Usuario[], currentPage: number) => {
+  const getCurrentItems = (items: User[], currentPage: number) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     return items.slice(startIndex, startIndex + itemsPerPage);
   };
@@ -478,12 +699,13 @@ const Clientes = () => {
     </thead>
   );
 
-  const TableBody = ({ items }: { items: Usuario[] }) => (
+  const TableBody = ({ items }: { items: User[] }) => (
     <tbody className="text-center text-xs lg:text-md xl:text-base border border-gray-500">
       {items.map((usuario) => (
         <tr
           key={usuario.id}
           className="h-10 hover:bg-cyan-700/20 cursor-pointer"
+          onClick={() => handleClienteClick(usuario)}
         >
           <th scope="row" className="border border-gray-500">
             {usuario.id}
@@ -542,7 +764,7 @@ const Clientes = () => {
       </div>
 
       {/* Sección de Usuarios Registrados (sin pedidos) */}
-      <div className="w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto pt-8 pb-16">
         <h2 className="text-lg font-semibold mb-3">Usuarios Registrados</h2>
         <table className="w-full border border-gray-500">
           <TableHeaderRegistrados />
@@ -574,6 +796,13 @@ const Clientes = () => {
           </div>
         )}
       </div>
+
+      {/* Modal de detalle del cliente - CORRECCIÓN: usar las props correctas */}
+      <ClienteDetailModal
+        cliente={selectedCliente}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
