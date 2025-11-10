@@ -861,10 +861,10 @@ const Productos = () => {
 
     return (
         <div>
-            <section className="w-11/12 mx-auto">
+            <section className="w-11/12 mx-auto mt-8">
                 {/* Header con título y controles */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-                    <h1 className="text-2xl font-semibold text-gray-800">Productos</h1>
+                    <h1 className="text-3xl font-semibold text-gray-800">Productos</h1>
                     <div className="flex items-center space-x-4">
                         <button className='bg-gray-200 text-white pt-1 pb-2 px-2 rounded-lg hover:bg-cyan-950 transition-colors shadow-sm flex items-center gap-2'>
                             <span className="text-2xl text-cyan-950 hover:text-white">+</span>
