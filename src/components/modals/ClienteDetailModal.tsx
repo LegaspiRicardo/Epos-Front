@@ -73,40 +73,42 @@ const ClienteDetailModal = ({ cliente, isOpen, onClose }: ClienteDetailModalProp
               Domicilios ({cliente.domicilios?.length || 0})
             </h3>
             {cliente.domicilios && cliente.domicilios.length > 0 ? (
-              <div className="space-y-4">
-                {cliente.domicilios.map((domicilio: Domicilio) => (
-                  <div
-                    key={domicilio.id}
-                    className={`border rounded-lg p-4 ${
-                      domicilio.principal ? "border-cyan-500 bg-cyan-50" : "border-gray-200"
-                    }`}
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-semibold text-gray-700">
-                        {domicilio.tipo.toUpperCase()}
-                        {domicilio.principal && (
-                          <span className="ml-2 bg-cyan-500 text-white px-2 py-1 rounded-full text-xs">
-                            PRINCIPAL
-                          </span>
-                        )}
-                      </span>
-                    </div>
-                    <p className="text-gray-600">
-                      {domicilio.calle} #{domicilio.numero}
-                    </p>
-                    <p className="text-gray-600">
-                      {domicilio.colonia}, {domicilio.ciudad}
-                    </p>
-                    <p className="text-gray-600">
-                      {domicilio.estado}, C.P. {domicilio.codigoPostal}
-                    </p>
-                    {domicilio.referencias && (
-                      <p className="text-gray-500 text-sm mt-2">
-                        <span className="font-semibold">Referencias:</span> {domicilio.referencias}
+              <div className="overflow-x-auto"> {/* Contenedor con scroll horizontal */}
+                <div className="flex space-x-4 pb-4 min-w-max"> {/* Flex horizontal con ancho mínimo */}
+                  {cliente.domicilios.map((domicilio: Domicilio) => (
+                    <div
+                      key={domicilio.id}
+                      className={`border rounded-lg p-4 min-w-[280px] max-w-[320px] flex-shrink-0 ${
+                        domicilio.principal ? "border-cyan-500 bg-cyan-50" : "border-gray-200"
+                      }`}
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-semibold text-gray-700">
+                          {domicilio.tipo.toUpperCase()}
+                          {domicilio.principal && (
+                            <span className="ml-2 bg-cyan-500 text-white px-2 py-1 rounded-full text-xs">
+                              PRINCIPAL
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      <p className="text-gray-600">
+                        {domicilio.calle} #{domicilio.numero}
                       </p>
-                    )}
-                  </div>
-                ))}
+                      <p className="text-gray-600">
+                        {domicilio.colonia}, {domicilio.ciudad}
+                      </p>
+                      <p className="text-gray-600">
+                        {domicilio.estado}, C.P. {domicilio.codigoPostal}
+                      </p>
+                      {domicilio.referencias && (
+                        <p className="text-gray-500 text-sm mt-2">
+                          <span className="font-semibold">Referencias:</span> {domicilio.referencias}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : (
               <p className="text-gray-500 text-center py-4">

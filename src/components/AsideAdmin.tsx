@@ -21,7 +21,7 @@ const AsideAdmin: React.FC = () => {
             ]
         },
         { path: '/admin/clientes', label: 'Clientes', icon: '/icons/cliente.png' },
-        { path: '/admin/analisis', label: 'Análisis', icon: '/icons/grafica.png' },
+        { path: '/admin/analisis', label: 'Cotizaciones y Pedidos', icon: '/icons/grafica.png' },
         { path: '/admin/perfil', label: 'Mi Cuenta', icon: '/icons/usuario.png' },
     ];
 
@@ -55,7 +55,7 @@ const AsideAdmin: React.FC = () => {
 
     return (
         <>
-            {/* Botón del menú hamburguesa - visible solo en móvil/tablet */}
+            {/* Botón del menú hamburguesa - visible solo en celular/tablet */}
             <button
                 onClick={toggleMenu}
                 className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-cyan-950 text-white rounded-md shadow-lg"
@@ -63,7 +63,7 @@ const AsideAdmin: React.FC = () => {
                 {isMenuOpen ? '✕' : '☰'}
             </button>
 
-            {/* Overlay para cerrar el menú al hacer click fuera - solo en móvil/tablet */}
+            {/* Overlay para cerrar el menú al hacer click fuera - solo en celular/tablet */}
             {isMenuOpen && (
                 <div
                     className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
@@ -71,9 +71,10 @@ const AsideAdmin: React.FC = () => {
                 />
             )}
 
-            {/* Menú lateral */}
+            {/* Menú lateral  */}
             <aside className={`
-                fixed lg:static
+                fixed
+                left-0 top-0 bottom-0
                 w-64 bg-cyan-950 text-white min-h-screen p-4
                 transform transition-transform duration-300 ease-in-out z-40
                 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}

@@ -9,7 +9,7 @@ const LayoutAdmin = () => {
             <AsideAdmin />
 
             {/* Main Content */}
-            <div className="w-full overflow-x-hidden">
+            <div className="w-full overflow-x-hidden lg:ml-64">
                 <main className="flex-1 bg-white p-0 overflow-auto">
 
                     <div className="w-full overflow-x-hidden">
