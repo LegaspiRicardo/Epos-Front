@@ -21,7 +21,7 @@ const AsideAdmin: React.FC = () => {
             ]
         },
         { path: '/admin/clientes', label: 'Clientes', icon: '/icons/cliente.png' },
-        { path: '/admin/analisis', label: 'Cotizaciones y Pedidos', icon: '/icons/grafica.png' },
+        { path: '/admin/cotizaciones-pedidos', label: 'Cotizaciones y Pedidos', icon: '/icons/grafica.png' },
         { path: '/admin/perfil', label: 'Mi Cuenta', icon: '/icons/usuario.png' },
     ];
 

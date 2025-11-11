@@ -49,7 +49,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="productos" element={<Productos />} />
             <Route path="clientes" element={<Clientes />} />
-            <Route path="analisis" element={<Analisis />} />
+            <Route path="cotizaciones-pedidos" element={<Analisis />} />
             <Route path="perfil" element={<PerfilAdmin />} />
             <Route path="acabados" element={<CMA />} />
             <Route path="categorias" element={<CMA />} />
