@@ -58,7 +58,7 @@ const AsideAdmin: React.FC = () => {
             {/* Botón del menú hamburguesa - visible solo en celular/tablet */}
             <button
                 onClick={toggleMenu}
-                className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-cyan-950 text-white rounded-md shadow-lg"
+                className="lg:hidden fixed top-7 left-6 z-50 p-2 bg-cyan-950 text-white rounded-md shadow-lg"
             >
                 {isMenuOpen ? '✕' : '☰'}
             </button>

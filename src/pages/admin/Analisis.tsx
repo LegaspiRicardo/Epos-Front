@@ -24,7 +24,7 @@ const Analisis = () => {
 
     const itemsPerPage = 8;
 
-    // Función para formatear fechas (similar a Clientes)
+    // Función para formatear fechas 
     const formatDate = (dateString: string): string => {
         if (!dateString) return "N/A";
 
@@ -50,7 +50,7 @@ const Analisis = () => {
         }).format(amount);
     };
 
-    // Funciones de ordenamiento (similar a Clientes)
+    // Funciones de ordenamiento 
     const handleSortCotizaciones = (key: string) => {
         let direction: "asc" | "desc" = "asc";
         if (
@@ -496,7 +496,7 @@ const Analisis = () => {
 
     return (
         <div>
-            <div className="w-11/12 mx-auto mt-8">
+            <div className="lg:w-11/12 md:w-10/12 w-9/12 ml-16 md:mx-auto mt-8">
                 <h1 className="text-3xl font-semibold mb-4">Cotizaciones y Pedidos</h1>
             </div>
 

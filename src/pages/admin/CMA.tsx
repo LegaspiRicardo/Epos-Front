@@ -103,7 +103,7 @@ function CMA() {
   }) => (
     <div className="mb-12">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl w-8/12 md:w-10/12 lg:w-full mx-auto font-semibold text-gray-800 flex items-center">
           {title}
         </h2>
         <button
