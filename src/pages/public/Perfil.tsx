@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Footer from '../../components/Footer';
+import ModalCotizacion from '../../components/modals/ClienteCotizacionModal';
+import type { Cotizacion } from '../../types/Cotizacion';
+import type { Categoria } from '../../types/Categoria';
+import type { Acabado } from '../../types/Acabado';
 
 interface CardItem {
     id: number;
@@ -8,15 +12,6 @@ interface CardItem {
     descripcion: string;
     acabado: string;
     precio: number;
-}
-
-interface Cotizacion {
-    id: number;
-    nombre: string;
-    fecha: string;
-    estado: "pendiente" | "en_proceso" | "completada";
-    enlaceDrive: string;
-    total: number;
 }
 
 const cardData: CardItem[] = [
@@ -38,41 +33,135 @@ const cardData: CardItem[] = [
     { id: 16, nombre: "BR10-046LP", descripcion: "Birlo rueda 3/4 - 16 * 2.375", acabado: "Pavonado", precio: 150, img: "img" },
 ];
 
+// Objetos mock para categorías y acabados
+const categoriaMock: Categoria = {
+    id: 1,
+    nombre: "Tornillos",
+    descripcion: "Tornillos y birlos"
+};
+
+const acabadoMock: Acabado = {
+    id: 1,
+    nombre: "Pavonado"
+};
+
+const marcaMock = {
+    id: 1,
+    nombre: "Marca Genérica"
+};
+
 const cotizacionesData: Cotizacion[] = [
     {
         id: 1,
-        nombre: "Cotización Proyecto Industrial",
-        fecha: "2024-01-15",
-        estado: "en_proceso",
-        enlaceDrive: "https://drive.google.com/...",
-        total: 12500
+        clienteId: 1,
+        clienteNombre: "Juan Pérez",
+        clienteEmail: "juan@email.com",
+        clienteTelefono: "33 1234 5678",
+        fechaCreacion: "2024-01-10",
+        estado: "pendiente",
+        items: [
+            {
+                producto: {
+                    id: 1,
+                    nombre: "BR10-046LP",
+                    descripcion: "Birlo rueda 3/4 - 16 * 2.375",
+                    precio: 150,
+                    stock: 100,
+                    status: 'existente',
+                    id_marca: 1,
+                    id_categoria: 1,
+                    id_acabado: 1,
+                    // Objetos completos
+                    categoria: categoriaMock,
+                    acabado: acabadoMock,
+                    marca: marcaMock
+                },
+                cantidad: 10,
+                precioUnitario: 150,
+                subtotal: 1500
+            }
+        ],
+        subtotal: 1500,
+        iva: 240,
+        total: 1740,
+        domicilioEntrega: {
+            calle: "Av. Revolución",
+            numeroExterior: "123",
+            numeroInterior: "",
+            colonia: "Centro",
+            ciudad: "Guadalajara",
+            estado: "Jalisco",
+            codigoPostal: "44100",
+            referencias: "Frente al parque"
+        }
     },
     {
         id: 2,
-        nombre: "Refacciones Taller Mecánico",
-        fecha: "2024-01-10",
-        estado: "pendiente",
-        enlaceDrive: "https://drive.google.com/...",
-        total: 8500
-    },
-    {
-        id: 3,
-        nombre: "Kit Mantenimiento Preventivo",
-        fecha: "2024-01-05",
-        estado: "completada",
-        enlaceDrive: "https://drive.google.com/...",
-        total: 23400
+        clienteId: 1,
+        clienteNombre: "Juan Pérez",
+        clienteEmail: "juan@email.com",
+        clienteTelefono: "33 1234 5678",
+        fechaCreacion: "2024-01-15",
+        estado: "enviada",
+        items: [
+            {
+                producto: {
+                    id: 2,
+                    nombre: "TR20-100LP",
+                    descripcion: "Tornillo hexagonal 1/2 - 13 * 3",
+                    precio: 200,
+                    stock: 50,
+                    status: 'existente',
+                    id_marca: 1,
+                    id_categoria: 1,
+                    id_acabado: 1,
+                    categoria: categoriaMock,
+                    acabado: acabadoMock,
+                    marca: marcaMock
+                },
+                cantidad: 5,
+                precioUnitario: 200,
+                subtotal: 1000
+            },
+            {
+                producto: {
+                    id: 3,
+                    nombre: "AR15-050LP",
+                    descripcion: "Arandela plana 3/8",
+                    precio: 25,
+                    stock: 200,
+                    status: 'existente',
+                    id_marca: 1,
+                    id_categoria: 1,
+                    id_acabado: 1,
+                    categoria: categoriaMock,
+                    acabado: acabadoMock,
+                    marca: marcaMock
+                },
+                cantidad: 20,
+                precioUnitario: 25,
+                subtotal: 500
+            }
+        ],
+        subtotal: 1500,
+        iva: 240,
+        total: 1740,
+        fechaEnvio: "2024-01-16",
+        notasCliente: "Urgente para taller mecánico"
     },
 ];
 
 const Perfil: React.FC = () => {
     const [seccionActiva, setSeccionActiva] = useState<"pedidos" | "domicilios" | "cotizaciones" | "favoritos">("favoritos");
+    const [selectedCotizacion, setSelectedCotizacion] = useState<Cotizacion | null>(null);
 
     const getEstadoColor = (estado: string) => {
         switch (estado) {
             case "pendiente": return "bg-yellow-100 text-yellow-800";
-            case "en_proceso": return "bg-blue-100 text-blue-800";
-            case "completada": return "bg-green-100 text-green-800";
+            case "enviada": return "bg-blue-100 text-blue-800";
+            case "aceptada": return "bg-green-100 text-green-800";
+            case "rechazada": return "bg-red-100 text-red-800";
+            case "expirada": return "bg-gray-100 text-gray-800";
             default: return "bg-gray-100 text-gray-800";
         }
     };
@@ -80,10 +169,20 @@ const Perfil: React.FC = () => {
     const getEstadoTexto = (estado: string) => {
         switch (estado) {
             case "pendiente": return "Pendiente";
-            case "en_proceso": return "En Proceso";
-            case "completada": return "Completada";
+            case "enviada": return "Enviada";
+            case "aceptada": return "Aceptada";
+            case "rechazada": return "Rechazada";
+            case "expirada": return "Expirada";
             default: return estado;
         }
+    };
+
+    const formatDate = (dateString: string) => {
+        return new Date(dateString).toLocaleDateString('es-MX', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
     };
 
     return (
@@ -160,29 +259,39 @@ const Perfil: React.FC = () => {
                 {seccionActiva === "cotizaciones" && (
                     <div className="pb-4">
                         {cotizacionesData.map((cotizacion) => (
-                            <div key={cotizacion.id} className="my-4 w-full bg-white border border-gray-300 rounded-lg shadow-sm py-4 px-4 transition-transform hover:scale-[1.02] duration-300">
+                            <div 
+                                key={cotizacion.id} 
+                                className="my-4 w-full bg-white border border-gray-300 rounded-lg shadow-sm py-4 px-4 transition-transform hover:scale-[1.02] duration-300 cursor-pointer"
+                                onClick={() => setSelectedCotizacion(cotizacion)}
+                            >
                                 <div className="flex justify-between items-start mb-3">
-                                    <h3 className="text-lg font-semibold text-gray-800">{cotizacion.nombre}</h3>
+                                    <h3 className="text-lg font-semibold text-gray-800">Cotización #{cotizacion.id}</h3>
                                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getEstadoColor(cotizacion.estado)}`}>
                                         {getEstadoTexto(cotizacion.estado)}
                                     </span>
                                 </div>
 
                                 <div className="flex justify-between items-center text-sm text-gray-600 mb-3">
-                                    <p>Fecha: {cotizacion.fecha}</p>
+                                    <div>
+                                        <p><strong>Cliente:</strong> {cotizacion.clienteNombre}</p>
+                                        <p><strong>Fecha:</strong> {formatDate(cotizacion.fechaCreacion)}</p>
+                                        <p><strong>Productos:</strong> {cotizacion.items.length} item(s)</p>
+                                    </div>
+
                                     <p className="text-lg font-bold text-cyan-800">${cotizacion.total.toLocaleString()} MXN</p>
                                 </div>
 
                                 <div className="flex justify-between items-center">
                                     <span className="text-xs text-gray-500">ID: #{cotizacion.id}</span>
-                                    <a
-                                        href={cotizacion.enlaceDrive}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedCotizacion(cotizacion);
+                                        }}
                                         className="bg-cyan-800 text-white px-4 py-2 rounded-lg text-sm hover:bg-cyan-700 transition-colors duration-200"
                                     >
-                                        Ver Cotización
-                                    </a>
+                                        Ver Detalles
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -237,6 +346,13 @@ const Perfil: React.FC = () => {
                     </div>
                 )}
             </div>
+
+            {/* Modal de Cotización */}
+            <ModalCotizacion 
+                selectedCotizacion={selectedCotizacion}
+                onClose={() => setSelectedCotizacion(null)}
+            />
+
             {/* Footer */}
             <Footer />
         </div>
