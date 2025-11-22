@@ -184,9 +184,9 @@ const Analisis = () => {
     // 2. Actualizar el estado de la cotización a "pagada"
     // 3. Agregar el nuevo pedido a la lista de pedidos
     // 4. Actualizar el estado global
-    
+
     console.log('Convirtiendo a pedido:', nuevoPedido);
-    
+
     alert(`Cotización #${cotizacion.id} convertida a pedido exitosamente`);
     setSelectedCotizacion(null);
   };
@@ -248,19 +248,18 @@ const Analisis = () => {
             </td>
             <td className="border border-gray-500">
               <span
-                className={`px-2 py-1 rounded-full text-xs ${
-                  cotizacion.estado === "enviada"
+                className={`px-2 py-1 rounded-full text-xs ${cotizacion.estado === "enviada"
                     ? "bg-blue-100 text-blue-800"
                     : cotizacion.estado === "aceptada"
-                    ? "bg-green-100 text-green-800"
-                    : cotizacion.estado === "pendiente"
-                    ? "bg-yellow-100 text-yellow-800"
-                    : cotizacion.estado === "rechazada"
-                    ? "bg-red-100 text-red-800"
-                    : cotizacion.estado === "pagada"
-                    ? "bg-purple-100 text-purple-800"
-                    : "bg-gray-100 text-gray-800"
-                }`}
+                      ? "bg-green-100 text-green-800"
+                      : cotizacion.estado === "pendiente"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : cotizacion.estado === "rechazada"
+                          ? "bg-red-100 text-red-800"
+                          : cotizacion.estado === "pagada"
+                            ? "bg-purple-100 text-purple-800"
+                            : "bg-gray-100 text-gray-800"
+                  }`}
               >
                 {cotizacion.estado}
               </span>
@@ -331,17 +330,16 @@ const Analisis = () => {
           </td>
           <td className="border border-gray-500">
             <span
-              className={`px-2 py-1 rounded-full text-xs ${
-                pedido.estado === "confirmado"
+              className={`px-2 py-1 rounded-full text-xs ${pedido.estado === "confirmado"
                   ? "bg-green-100 text-green-800"
                   : pedido.estado === "en_proceso"
-                  ? "bg-blue-100 text-blue-800"
-                  : pedido.estado === "enviado"
-                  ? "bg-purple-100 text-purple-800"
-                  : pedido.estado === "entregado"
-                  ? "bg-gray-100 text-gray-800"
-                  : "bg-yellow-100 text-yellow-800"
-              }`}
+                    ? "bg-blue-100 text-blue-800"
+                    : pedido.estado === "enviado"
+                      ? "bg-purple-100 text-purple-800"
+                      : pedido.estado === "entregado"
+                        ? "bg-gray-100 text-gray-800"
+                        : "bg-yellow-100 text-yellow-800"
+                }`}
             >
               {pedido.estado.replace("_", " ")}
             </span>
@@ -393,7 +391,7 @@ const Analisis = () => {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-          <div className="p-6">
+          <div className="p-4">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-semibold text-gray-800">
                 Cotización #{selectedCotizacion.id}
@@ -406,71 +404,52 @@ const Analisis = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
-                  Información del Cliente
-                </h4>
-                <div className="space-y-2">
-                  <p>
-                    <strong>Nombre:</strong> {selectedCotizacion.clienteNombre}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {selectedCotizacion.clienteEmail}
-                  </p>
-                  <p>
-                    <strong>Teléfono:</strong>{" "}
-                    {selectedCotizacion.clienteTelefono}
-                  </p>
-                  <p>
-                    <strong>Estado:</strong>
-                    <span
-                      className={`ml-2 px-2 py-1 rounded-full text-xs ${
-                        selectedCotizacion.estado === "enviada"
-                          ? "bg-blue-100 text-blue-800"
-                          : selectedCotizacion.estado === "aceptada"
-                          ? "bg-green-100 text-green-800"
-                          : selectedCotizacion.estado === "pendiente"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : selectedCotizacion.estado === "rechazada"
-                          ? "bg-red-100 text-red-800"
-                          : selectedCotizacion.estado === "pagada"
-                          ? "bg-purple-100 text-purple-800"
-                          : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {selectedCotizacion.estado}
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
-                  Fechas
-                </h4>
-                <div className="space-y-2">
-                  <p>
-                    <strong>Creación:</strong>{" "}
-                    {formatDate(selectedCotizacion.fechaCreacion)}
-                  </p>
-                  {selectedCotizacion.fechaEnvio && (
-                    <p>
-                      <strong>Envío:</strong>{" "}
-                      {formatDate(selectedCotizacion.fechaEnvio)}
-                    </p>
-                  )}
-                  {selectedCotizacion.fechaRespuesta && (
-                    <p>
-                      <strong>Respuesta:</strong>{" "}
-                      {formatDate(selectedCotizacion.fechaRespuesta)}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
+            {/* Sección Información cliente */}
             <div className="md:flex">
+              <div className=" md:w-6/12 md:mb-6 mb-8 mt-4">
+                <div>
+                  <h4 className="font-semibold text-lg mb-2 text-cyan-800">
+                    Información del Cliente
+                  </h4>
+                  <div className="space-y-2">
+                    <p>
+                      <strong>Nombre:</strong> {selectedCotizacion.clienteNombre}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {selectedCotizacion.clienteEmail}
+                    </p>
+                    <p>
+                      <strong>Teléfono:</strong>{" "}
+                      {selectedCotizacion.clienteTelefono}
+                    </p>
+                    <p> 
+                      <strong>Fecha de creación:</strong>{" "}
+                      {formatDate(selectedCotizacion.fechaCreacion)}
+                    </p>
+                    <p>
+                      <strong>Estado:</strong>
+                      <span
+                        className={`ml-2 px-2 py-1 rounded-full text-xs ${selectedCotizacion.estado === "enviada"
+                            ? "bg-blue-100 text-blue-800"
+                            : selectedCotizacion.estado === "aceptada"
+                              ? "bg-green-100 text-green-800"
+                              : selectedCotizacion.estado === "pendiente"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : selectedCotizacion.estado === "rechazada"
+                                  ? "bg-red-100 text-red-800"
+                                  : selectedCotizacion.estado === "pagada"
+                                    ? "bg-purple-100 text-purple-800"
+                                    : "bg-gray-100 text-gray-800"
+                          }`}
+                      >
+                        {selectedCotizacion.estado}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sección Dirección entrega */}
               <div className="md:w-6/12 md:mr-4">
                 {selectedCotizacion.domicilioEntrega && (
                   <div className="mb-6">
@@ -498,204 +477,6 @@ const Analisis = () => {
                   </div>
                 )}
               </div>
-
-              {/* Sección para Orden de Pago y Comprobante */}
-              <div className="md:w-6/12">
-                {/* Orden de Pago */}
-                <div className="mb-6">
-                  <h4 className="font-semibold text-lg mb-3 text-cyan-800">
-                    Orden de Pago
-                  </h4>
-                  <div className="bg-gray-50 p-3 rounded-lg">
-                    {selectedCotizacion.ordenPagoUrl ? (
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="bg-red-100 p-2 rounded">
-                            <svg
-                              className="w-6 h-6 text-red-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                              />
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-800">
-                              Orden de Pago PDF
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              Documento disponible
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={handleViewOrdenPago}
-                            className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                          >
-                            Ver PDF
-                          </button>
-                          <button
-                            onClick={handleRemoveOrdenPago}
-                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                          >
-                            Eliminar
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center">
-                        <div className="mb-3">
-                          <svg
-                            className="w-12 h-12 text-gray-400 mx-auto"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-                            />
-                          </svg>
-                        </div>
-                        <p className="text-gray-600 mb-3">
-                          No hay orden de pago adjunta
-                        </p>
-                        <label className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg cursor-pointer text-sm font-medium transition-colors inline-block">
-                          <span>Subir Orden de Pago PDF</span>
-                          <input
-                            type="file"
-                            accept=".pdf"
-                            onChange={handleFileUpload}
-                            className="hidden"
-                          />
-                        </label>
-                        <p className="text-xs text-gray-500 mt-2">
-                          Solo se permiten archivos PDF
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Comprobante de Pago (Solo visualización en admin) */}
-                <div className="mb-6">
-                  <h4 className="font-semibold text-lg mb-3 text-cyan-800">
-                    Comprobante de Pago
-                  </h4>
-                  <div className="bg-gray-50 p-3 rounded-lg">
-                    {selectedCotizacion.comprobantePagoUrl ? (
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="bg-green-100 p-2 rounded">
-                            <svg
-                              className="w-6 h-6 text-green-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-800">
-                              Comprobante de Pago
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              Subido por el cliente
-                            </p>
-                            {selectedCotizacion.fechaPago && (
-                              <p className="text-xs text-gray-500">
-                                Pagado el:{" "}
-                                {formatDate(selectedCotizacion.fechaPago)}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() =>
-                              window.open(
-                                selectedCotizacion.comprobantePagoUrl,
-                                "_blank"
-                              )
-                            }
-                            className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                          >
-                            Ver
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center">
-                        <div className="mb-3">
-                          <svg
-                            className="w-12 h-12 text-gray-400 mx-auto"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                            />
-                          </svg>
-                        </div>
-                        <p className="text-gray-600 mb-3">
-                          Esperando comprobante de pago del cliente
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          El cliente debe subir el comprobante en la vista pública
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Botón para convertir a pedido */}
-                {selectedCotizacion.ordenPagoUrl &&
-                  selectedCotizacion.comprobantePagoUrl && (
-                    <div className="mb-6">
-                      <button
-                        onClick={() => convertirAPedido(selectedCotizacion)}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
-                      >
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span>Convertir a Pedido</span>
-                      </button>
-                      <p className="text-xs text-gray-500 mt-2 text-center">
-                        La cotización se convertirá en un pedido activo
-                      </p>
-                    </div>
-                  )}
-              </div>
             </div>
 
             {selectedCotizacion.notasInternas && (
@@ -711,6 +492,7 @@ const Analisis = () => {
               </div>
             )}
 
+            {/* Sección Productos Cotizados */}
             <div className="mb-6">
               <h4 className="font-semibold text-lg mb-3 text-cyan-800">
                 Productos Cotizados
@@ -725,10 +507,10 @@ const Analisis = () => {
                       <th className="border border-gray-300 px-3 py-2 text-center">
                         Cantidad
                       </th>
-                      <th className="border border-gray-300 px-3 py-2 text-right">
+                      <th className="border border-gray-300 px-3 py-2  md:text-right">
                         Precio Unitario
                       </th>
-                      <th className="border border-gray-300 px-3 py-2 text-right">
+                      <th className="border border-gray-300 px-3 py-2 md:text-right">
                         Subtotal
                       </th>
                     </tr>
@@ -736,7 +518,7 @@ const Analisis = () => {
                   <tbody>
                     {selectedCotizacion.items.map((item, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="border border-gray-300 px-3 py-2">
+                        <td className="border border-gray-300 p-2">
                           <div>
                             <p className="font-medium">
                               {item.producto.nombre}
@@ -749,10 +531,10 @@ const Analisis = () => {
                         <td className="border border-gray-300 px-3 py-2 text-center">
                           {item.cantidad}
                         </td>
-                        <td className="border border-gray-300 px-3 py-2 text-right">
+                        <td className="border border-gray-300 px-3 py-2 md:text-right text-center">
                           {formatCurrency(item.precioUnitario)}
                         </td>
-                        <td className="border border-gray-300 px-3 py-2 text-right">
+                        <td className="border border-gray-300 px-3 py-2 md:text-right text-center">
                           {formatCurrency(item.subtotal)}
                         </td>
                       </tr>
@@ -761,6 +543,207 @@ const Analisis = () => {
                 </table>
               </div>
             </div>
+
+
+            {/* Sección para Orden de Pago y Comprobante */}
+            <div className="md:flex">
+              {/* Orden de Pago */}
+              <div className="md:mb-6 md:w-6/12 md:mr-4 mb-10">
+                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
+                  Orden de Pago
+                </h4>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  {selectedCotizacion.ordenPagoUrl ? (
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="bg-red-100 p-2 rounded">
+                          <svg
+                            className="w-6 h-6 text-red-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">
+                            Orden de Pago PDF
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            Documento disponible
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={handleViewOrdenPago}
+                          className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          Ver PDF
+                        </button>
+                        <button
+                          onClick={handleRemoveOrdenPago}
+                          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="mb-3">
+                        <svg
+                          className="w-12 h-12 text-gray-400 mx-auto"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 mb-3">
+                        No hay orden de pago adjunta
+                      </p>
+                      <label className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg cursor-pointer text-sm font-medium transition-colors inline-block">
+                        <span>Subir Orden de Pago PDF</span>
+                        <input
+                          type="file"
+                          accept=".pdf"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                        />
+                      </label>
+                      <p className="text-xs text-gray-500 mt-2">
+                        Solo se permiten archivos PDF
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Comprobante de Pago (Solo visualización en admin) */}
+              <div className="mb-6 md:w-6/12 ml-auto">
+                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
+                  Comprobante de Pago
+                </h4>
+                <div className="bg-gray-50 px-3 py-9 rounded-lg">
+                  {selectedCotizacion.comprobantePagoUrl ? (
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="bg-green-100 p-2 rounded">
+                          <svg
+                            className="w-6 h-6 text-green-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">
+                            Comprobante de Pago
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            Subido por el cliente
+                          </p>
+                          {selectedCotizacion.fechaPago && (
+                            <p className="text-xs text-gray-500">
+                              Pagado el:{" "}
+                              {formatDate(selectedCotizacion.fechaPago)}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() =>
+                            window.open(
+                              selectedCotizacion.comprobantePagoUrl,
+                              "_blank"
+                            )
+                          }
+                          className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          Ver
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="mb-3">
+                        <svg
+                          className="w-12 h-12 text-gray-400 mx-auto"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 mb-3">
+                        Esperando comprobante de pago del cliente
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        El cliente debe subir el comprobante desde su perfil
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Botón para convertir a pedido */}
+              {selectedCotizacion.ordenPagoUrl &&
+                selectedCotizacion.comprobantePagoUrl && (
+                  <div className="mb-6">
+                    <button
+                      onClick={() => convertirAPedido(selectedCotizacion)}
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      <span>Convertir a Pedido</span>
+                    </button>
+                    <p className="text-xs text-gray-500 mt-2 text-center">
+                      La cotización se convertirá en un pedido activo
+                    </p>
+                  </div>
+                )}
+            </div>
+
+
 
             <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">
               <div className="text-right">
@@ -820,17 +803,16 @@ const Analisis = () => {
                   <p>
                     <strong>Estado:</strong>
                     <span
-                      className={`ml-2 px-2 py-1 rounded-full text-xs ${
-                        selectedPedido.estado === "confirmado"
+                      className={`ml-2 px-2 py-1 rounded-full text-xs ${selectedPedido.estado === "confirmado"
                           ? "bg-green-100 text-green-800"
                           : selectedPedido.estado === "en_proceso"
-                          ? "bg-blue-100 text-blue-800"
-                          : selectedPedido.estado === "enviado"
-                          ? "bg-purple-100 text-purple-800"
-                          : selectedPedido.estado === "entregado"
-                          ? "bg-gray-100 text-gray-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}
+                            ? "bg-blue-100 text-blue-800"
+                            : selectedPedido.estado === "enviado"
+                              ? "bg-purple-100 text-purple-800"
+                              : selectedPedido.estado === "entregado"
+                                ? "bg-gray-100 text-gray-800"
+                                : "bg-yellow-100 text-yellow-800"
+                        }`}
                     >
                       {selectedPedido.estado.replace("_", " ")}
                     </span>
@@ -967,21 +949,19 @@ const Analisis = () => {
           <nav className="-mb-px flex space-x-8">
             <button
               onClick={() => setActiveTab("cotizaciones")}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "cotizaciones"
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === "cotizaciones"
                   ? "border-cyan-500 text-cyan-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
+                }`}
             >
               Cotizaciones ({mockCotizaciones.length})
             </button>
             <button
               onClick={() => setActiveTab("pedidos")}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "pedidos"
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === "pedidos"
                   ? "border-cyan-500 text-cyan-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
+                }`}
             >
               Pedidos ({mockPedidos.length})
             </button>
