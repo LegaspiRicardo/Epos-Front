@@ -16,7 +16,7 @@ export interface Cotizacion {
     clienteEmail: string;
     clienteTelefono: string;
     fechaCreacion: string;
-    estado: 'pendiente' | 'enviada' | 'aceptada' | 'rechazada' | 'expirada';
+    estado: 'pendiente' | 'enviada' | 'aceptada' | 'rechazada' | 'expirada' | 'pagada';
     items: ItemCotizacion[];
     subtotal: number;
     iva: number;
@@ -26,6 +26,9 @@ export interface Cotizacion {
     domicilioEntrega?: Domicilio;
     fechaEnvio?: string;
     fechaRespuesta?: string;
+    ordenPagoUrl?: string;
+    comprobantePagoUrl?: string; // Nuevo campo para el comprobante
+    fechaPago?: string; // Fecha cuando se procesa el pago
 }
 
 export interface PedidoFromCotizacion {
