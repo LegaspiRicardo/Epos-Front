@@ -861,27 +861,30 @@ const Productos = () => {
 
     return (
         <div>
-            <section className="w-11/12 mx-auto mt-8">
+            <section className="w-full mx-auto">
                 {/* Header con título y controles */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-                    <h1 className="text-3xl font-semibold text-gray-800">Productos</h1>
-                    <div className="flex items-center space-x-4">
-                        <button className='bg-gray-200 text-white pt-1 pb-2 px-2 rounded-lg hover:bg-cyan-950 transition-colors shadow-sm flex items-center gap-2'>
-                            <span className="text-2xl text-cyan-950 hover:text-white">+</span>
-                        </button>
-                        <div className="relative flex-1 max-w-md">
-                            <input
-                                type="search"
-                                placeholder="Buscar productos..."
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-950 focus:border-transparent"
-                            />
-                            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                <img src="/icons/lupanegra.png" alt="" className='w-4'/>
-                            </span>
+                <div className="w-9/12 md:w-10/12 lg:w-11/12 mx-auto mt-4">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                        <h1 className="text-3xl font-semibold text-gray-800">Productos</h1>
+                        <div className="flex items-center space-x-4">
+                            <button className='bg-gray-200 text-white pt-1 pb-2 px-2 rounded-lg hover:bg-cyan-950 transition-colors shadow-sm flex items-center gap-2'>
+                                <span className="text-2xl text-cyan-950 hover:text-white">+</span>
+                            </button>
+                            <div className="relative flex-1 max-w-md">
+                                <input
+                                    type="search"
+                                    placeholder="Buscar productos..."
+                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-950 focus:border-transparent"
+                                />
+                                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <img src="/icons/lupanegra.png" alt="" className='w-4' />
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+<div className='w-11/12 mx-auto'>
                 {/* Tabla */}
                 <table className="w-full border border-gray-500">
                     <thead className="bg-cyan-900 text-white border border-gray-500 h-10 text-xs lg:text-md xl:text-base">
@@ -1078,6 +1081,8 @@ const Productos = () => {
                         </select>
                     </div>
                 </div>
+</div>
+
             </section>
 
             {/* Modal de Producto */}

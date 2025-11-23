@@ -103,9 +103,12 @@ function CMA() {
   }) => (
     <div className="mb-12">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <div className="w-9/12 md:w-10/12 lg:w-11/12 mx-auto"> 
+        <h2 className=" text-2xl font-semibold text-gray-800 flex items-center">
           {title}
         </h2>
+        </div>
+
         <button
           className="bg-cyan-950 hover:bg-cyan-700 text-white w-10 h-10 pb-1 rounded-full flex items-center justify-center text-2xl font-light transition-all duration-200 hover:scale-110 shadow-md"
           title={`Agregar nueva ${title.toLowerCase()}`}
@@ -137,8 +140,7 @@ function CMA() {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <section className="w-11/12 mx-auto py-8">
-        {/* Secciones de contenido - una debajo de otra */}
+      <section className="w-11/12 mx-auto mt-4">
         <SectionCarousel title="Categorías" items={sampleData.categorias} />
 
         <SectionCarousel title="Marcas" items={sampleData.marcas} />

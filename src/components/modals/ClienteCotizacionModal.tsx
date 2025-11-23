@@ -127,14 +127,7 @@ const ClienteModalCotizacion: React.FC<ModalCotizacionProps> = ({
 
                     </div>
 
-                    {selectedCotizacion.notasCliente && (
-                        <div className="mb-6">
-                            <h4 className="font-semibold text-lg mb-3 text-cyan-800">Tus Notas</h4>
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <p className="text-gray-700">{selectedCotizacion.notasCliente}</p>
-                            </div>
-                        </div>
-                    )}
+
 
                     <div className="mb-6">
                         <h4 className="font-semibold text-lg mb-3 text-cyan-800">Productos Cotizados</h4>
