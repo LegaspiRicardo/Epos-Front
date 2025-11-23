@@ -244,7 +244,7 @@ const Clientes = () => {
 
   return (
     <div>
-      <div className="lg:w-11/12 md:w-10/12 w-8/12 mx-auto mt-8">
+      <div className="lg:w-11/12 md:w-10/12 w-8/12 mx-auto mt-4">
         <h1 className="text-3xl font-semibold mb-4">Gestión de Clientes</h1>
       </div>
 

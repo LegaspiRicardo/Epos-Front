@@ -26,11 +26,11 @@ interface ModalDomicilioProps {
 
 // Estados de México para el dropdown
 const estadosMexico = [
-    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
-    "Chiapas", "Chihuahua", "Ciudad de México", "Coahuila", "Colima", 
-    "Durango", "Estado de México", "Guanajuato", "Guerrero", "Hidalgo", 
-    "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", 
-    "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", 
+    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
+    "Chiapas", "Chihuahua", "Ciudad de México", "Coahuila", "Colima",
+    "Durango", "Estado de México", "Guanajuato", "Guerrero", "Hidalgo",
+    "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca",
+    "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa",
     "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"
 ];
 
@@ -38,7 +38,7 @@ const ModalDomicilio: React.FC<ModalDomicilioProps> = ({
     isOpen,
     onClose,
     domicilio,
-    mode, 
+    mode,
     onEdit,
     onSave
 }) => {
@@ -79,11 +79,11 @@ const ModalDomicilio: React.FC<ModalDomicilioProps> = ({
     if (!isOpen) return null;
 
     const isView = mode === 'view';
-   // const isCreate = mode === 'create';
+    // const isCreate = mode === 'create';
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
-        
+
         if (type === 'checkbox') {
             const checked = (e.target as HTMLInputElement).checked;
             setFormData(prev => ({ ...prev, [name]: checked }));
@@ -94,18 +94,18 @@ const ModalDomicilio: React.FC<ModalDomicilioProps> = ({
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (onSave) {
             // Para editar, mantenemos el ID original
-            const domicilioToSave: DomicilioPerfil = domicilio 
+            const domicilioToSave: DomicilioPerfil = domicilio
                 ? { ...formData, id: domicilio.id }
                 : { ...formData, id: Date.now() }; // ID temporal para nuevo
-            
+
             onSave(domicilioToSave);
         }
     };
 
-    const titulo = isView 
+    const titulo = isView
         ? (domicilio?.principal ? "Domicilio Principal" : "Domicilio")
         : (domicilio ? "Editar Domicilio" : "Agregar Domicilio");
 
@@ -128,18 +128,21 @@ const ModalDomicilio: React.FC<ModalDomicilioProps> = ({
                     {isView && domicilio ? (
                         // MODO VISUALIZACIÓN
                         <div className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
-                                <p className="text-gray-900">{domicilio.tipo.toUpperCase()}</p>
-                            </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                                <p className="text-gray-900">{domicilio.calle} #{domicilio.numero}</p>
-                                <p className="text-gray-900">{domicilio.colonia}, {domicilio.ciudad}</p>
-                                <p className="text-gray-900">{domicilio.estado}, C.P. {domicilio.codigoPostal}</p>
+                            <div className='flex'>
+                                <div className=' w-9/12'>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                                    <p className="text-gray-900">{domicilio.calle} #{domicilio.numero}</p>
+                                    <p className="text-gray-900">{domicilio.colonia}, {domicilio.ciudad}</p>
+                                    <p className="text-gray-900">{domicilio.estado}, C.P. {domicilio.codigoPostal}</p>
+                                </div>
+                                <div>
+                                    <div className='w-3/12'>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                                        <p className="text-gray-900">{domicilio.tipo.toUpperCase()}</p>
+                                    </div>
+                                </div>
                             </div>
-
                             {domicilio.referencias && (
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Referencias</label>
