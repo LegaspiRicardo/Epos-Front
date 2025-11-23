@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Footer from '../../components/Footer';
 import ModalCotizacion from '../../components/modals/ClienteCotizacionModal';
 import ModalPedido from '../../components/modals/ClientePedidoModal';
+import ModalDomicilio from '../../components/modals/public/ModalDomicilio';
+
+
+
 import type { Cotizacion } from '../../types/Cotizacion';
 import type { Categoria } from '../../types/Categoria';
 import type { Acabado } from '../../types/Acabado';
@@ -343,7 +347,11 @@ const Perfil: React.FC = () => {
     const [selectedCotizacion, setSelectedCotizacion] = useState<Cotizacion | null>(null);
     const [selectedPedido, setSelectedPedido] = useState<PedidoPerfil | null>(null);
     const [selectedDomicilio, setSelectedDomicilio] = useState<DomicilioPerfil | null>(null);
+
     const [showModalDomicilio, setShowModalDomicilio] = useState(false);
+    const [modalDomicilioMode, setModalDomicilioMode] = useState<'view' | 'create'>('view');
+
+
 
     const getEstadoColor = (estado: string) => {
         switch (estado) {
@@ -398,6 +406,38 @@ const Perfil: React.FC = () => {
             day: 'numeric'
         });
     };
+
+
+    const handleViewDomicilio = (domicilio: DomicilioPerfil) => {
+        setSelectedDomicilio(domicilio);
+        setModalDomicilioMode('view');
+        setShowModalDomicilio(true);
+    };
+
+    const handleCreateDomicilio = () => {
+        setSelectedDomicilio(null);
+        setModalDomicilioMode('create');
+        setShowModalDomicilio(true);
+    };
+
+
+    const handleEditDomicilio = () => {
+        setModalDomicilioMode('create');
+    };
+
+    const handleCloseDomicilioModal = () => {
+        setShowModalDomicilio(false);
+        setSelectedDomicilio(null);
+        setModalDomicilioMode('view'); // Resetear a view cuando se cierra
+    };
+
+    const handleSaveDomicilio = (domicilio: DomicilioPerfil) => {
+        // Aquí iría la lógica para guardar/actualizar el domicilio
+        console.log("Guardar domicilio:", domicilio);
+        handleCloseDomicilioModal();
+    };
+
+
 
     return (
         <div className="">
@@ -596,7 +636,7 @@ const Perfil: React.FC = () => {
                                 Domicilios ({domiciliosData.length})
                             </h3>
                             <button
-                                onClick={() => setShowModalDomicilio(true)}
+                                onClick={handleCreateDomicilio}
                                 className="bg-cyan-800 hover:bg-cyan-700 text-2xl text-white px-4 pb-1 rounded-lg transition-colors duration-200"
                             >
                                 +
@@ -609,12 +649,11 @@ const Perfil: React.FC = () => {
                                     {domiciliosData.map((domicilio) => (
                                         <div
                                             key={domicilio.id}
-                                            className={`border rounded-lg p-4 min-w-[280px] max-w-[320px] flex-shrink-0 cursor-pointer transition-all hover:shadow-md ${
-                                                domicilio.principal 
-                                                    ? "border-cyan-500 bg-cyan-50" 
-                                                    : "border-gray-200 hover:border-gray-300"
-                                            }`}
-                                            onClick={() => setSelectedDomicilio(domicilio)}
+                                            className={`border rounded-lg p-4 min-w-[280px] max-w-[320px] flex-shrink-0 cursor-pointer transition-all hover:shadow-md ${domicilio.principal
+                                                ? "border-cyan-500 bg-cyan-50"
+                                                : "border-gray-200 hover:border-gray-300"
+                                                }`}
+                                            onClick={() => handleViewDomicilio(domicilio)}
                                         >
                                             <div className="flex justify-between items-start mb-2">
                                                 <span className="font-semibold text-gray-700">
@@ -628,7 +667,7 @@ const Perfil: React.FC = () => {
                                                 <button
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        setSelectedDomicilio(domicilio);
+                                                        handleViewDomicilio(domicilio);
                                                     }}
                                                     className="text-gray-500 hover:text-cyan-700"
                                                 >
@@ -666,7 +705,7 @@ const Perfil: React.FC = () => {
                                 <p className="text-gray-500 text-lg mb-2">No hay domicilios registrados</p>
                                 <p className="text-gray-400 text-sm mb-4">Agrega tu primer domicilio para comenzar</p>
                                 <button
-                                    onClick={() => setShowModalDomicilio(true)}
+                                    onClick={handleCreateDomicilio}
                                     className="bg-cyan-800 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
                                 >
                                     Agregar Primer Domicilio
@@ -689,119 +728,16 @@ const Perfil: React.FC = () => {
                 onClose={() => setSelectedPedido(null)}
             />
 
-            {/* Modal de Domicilio (para editar/ver) */}
-            {selectedDomicilio && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-                        <div className="p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h3 className="text-xl font-semibold text-gray-800">
-                                    {selectedDomicilio.principal ? " Domicilio Principal" : " Domicilio"}
-                                </h3>
-                                <button
-                                    onClick={() => setSelectedDomicilio(null)}
-                                    className="text-gray-500 hover:text-gray-700 text-2xl"
-                                >
-                                    ×
-                                </button>
-                            </div>
+            {/* Modal de Domicilio */}
+            <ModalDomicilio
+                isOpen={showModalDomicilio}
+                onClose={handleCloseDomicilioModal}
+                domicilio={selectedDomicilio}
+                mode={modalDomicilioMode}
+                onEdit={handleEditDomicilio} // Necesitarás agregar esta prop al ModalDomicilio
+                onSave={handleSaveDomicilio}
+            />
 
-                            <div className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
-                                    <p className="text-gray-900">{selectedDomicilio.tipo.toUpperCase()}</p>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                                    <p className="text-gray-900">{selectedDomicilio.calle} #{selectedDomicilio.numero}</p>
-                                    <p className="text-gray-900">{selectedDomicilio.colonia}, {selectedDomicilio.ciudad}</p>
-                                    <p className="text-gray-900">{selectedDomicilio.estado}, C.P. {selectedDomicilio.codigoPostal}</p>
-                                </div>
-
-                                {selectedDomicilio.referencias && (
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Referencias</label>
-                                        <p className="text-gray-900">{selectedDomicilio.referencias}</p>
-                                    </div>
-                                )}
-
-                                {selectedDomicilio.principal && (
-                                    <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-3">
-                                        <p className="text-cyan-800 text-sm font-medium">Este es tu domicilio principal</p>
-                                        <p className="text-cyan-600 text-xs mt-1">Las entregas se enviarán a esta dirección por defecto</p>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="flex justify-end space-x-3 pt-6 mt-6 border-t border-gray-200">
-                                <button
-                                    onClick={() => setSelectedDomicilio(null)}
-                                    className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
-                                >
-                                    Cerrar
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        // Aquí iría la lógica para editar
-                                        console.log("Editar domicilio:", selectedDomicilio);
-                                    }}
-                                    className="bg-cyan-800 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
-                                >
-                                    Editar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Modal para agregar nuevo domicilio */}
-            {showModalDomicilio && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-                        <div className="p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h3 className="text-xl font-semibold text-gray-800">Agregar Domicilio</h3>
-                                <button
-                                    onClick={() => setShowModalDomicilio(false)}
-                                    className="text-gray-500 hover:text-gray-700 text-2xl"
-                                >
-                                    ×
-                                </button>
-                            </div>
-
-                            <div className="space-y-4">
-                                <p className="text-gray-600 text-sm">
-                                    Completa la información de tu nuevo domicilio.
-                                </p>
-                                <div className="text-center py-8">
-                                    <p className="text-gray-500">Formulario para agregar domicilio</p>
-                                    <p className="text-gray-400 text-sm mt-2">(Próximamente)</p>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end space-x-3 pt-6 mt-6 border-t border-gray-200">
-                                <button
-                                    onClick={() => setShowModalDomicilio(false)}
-                                    className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
-                                >
-                                    Cancelar
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        // Aquí iría la lógica para guardar
-                                        setShowModalDomicilio(false);
-                                    }}
-                                    className="bg-cyan-800 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
-                                >
-                                    Guardar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {/* Footer */}
             <Footer />
