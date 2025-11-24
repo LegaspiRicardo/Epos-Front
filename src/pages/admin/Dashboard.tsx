@@ -10,6 +10,9 @@ function Dashboard() {
             <div>
                 <MetricCards usuarios={mockUsers} />
             </div>
+
+
+            <p className="w-10/12 mx-auto text-center text-gray-500 mt-16">Proximamente. Graficas, tablas e información relacionada a pedidos y cotizaciones</p>
         </>
     );
 }

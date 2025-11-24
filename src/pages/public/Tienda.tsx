@@ -137,13 +137,13 @@ const Tienda: React.FC = () => {
             {/* Filtros y Ordenamiento */}
             <div className="bg-white border-b border-gray-200 py-4">
                 <div className="w-11/12 mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div className="flex  md:flex-row justify-between items-start md:items-center gap-4">
                         <div className="flex items-center gap-4">
                             <button className="flex items-center gap-2 bg-cyan-800 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition-colors duration-200">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
                                 </svg>
-                                Filtros
+                                Filtrar
                             </button>
                         </div>
 
@@ -201,8 +201,16 @@ const Tienda: React.FC = () => {
                                     </section>
 
 
+                                    {/* Precio  */}
+                                    <div className="text-end mb-4">
+                                        <div> 
+                                            <p className="text-3xl font-semibold text-white ">${card.precio}.00 <span className="text-white text-xs">MXN</span></p>
+                                        </div>
+
+                                    </div>
+
                                     {/*Categoría, Marca y Acabado */}
-                                    <div className="flex justify-between items-center gap-2 my-4 ">
+                                    <div className="flex justify-between items-center gap-2  border-t py-3 border-gray-100 ">
                                         <div>
                                             <div className="flex justify-between items-center " >
 
@@ -228,13 +236,7 @@ const Tienda: React.FC = () => {
                                     </div>
 
 
-                                    {/* Precio y Acción */}
-                                    <div className="text-center py-3 border-t border-gray-100 ">
-                                        <div> 
-                                            <p className="text-2xl font-semibold text-white ">${card.precio}.00 <span className="text-white text-xs">MXN</span></p>
-                                        </div>
 
-                                    </div>
                                 </div>
                             </div>
                         </Link>
