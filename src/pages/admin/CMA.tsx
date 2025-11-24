@@ -175,7 +175,7 @@ function CMA() {
   }) => (
     <div className="mb-12">
       <div className="flex justify-between items-center mb-4">
-        <div className="w-9/12 md:w-10/12 lg:w-11/12 mx-auto">
+        <div className="w-8/12 md:w-10/12 lg:w-11/12 mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
             {title}
             <span className="ml-3 bg-cyan-100 text-cyan-800 text-sm font-medium px-2.5 py-0.5 rounded-full">
@@ -233,16 +233,8 @@ function CMA() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="lg:w-11/12 md:w-10/12 w-9/12  mx-auto py-4">
-          <h1 className="text-3xl font-bold text-gray-900">Administración</h1>
-          <p className="text-gray-600 mt-2">Gestiona categorías, marcas y acabados.</p>
-        </div>
-      </div>
-
       {/* Contenido */}
-      <section className="w-11/12 mx-auto py-8">
+      <section className="w-11/12 mx-auto md:py-8 py-4">
         <SectionCarousel
           title="Categorías"
           items={categorias}

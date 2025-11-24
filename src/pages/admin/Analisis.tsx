@@ -392,7 +392,7 @@ const Analisis = () => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <div className="p-4">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 md:mb-0">
               <h3 className="text-2xl font-semibold text-gray-800">
                 Cotización #{selectedCotizacion.id}
               </h3>
@@ -625,6 +625,7 @@ const Analisis = () => {
                         />
                       </label>
                       <p className="text-xs text-gray-500 mt-2">
+                        Opcional: Subir enlace a la carpeta de Google Drive <br />
                         Solo se permiten archivos PDF
                       </p>
                     </div>
@@ -774,7 +775,7 @@ const Analisis = () => {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-          <div className="p-6">
+          <div className="p-3">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-semibold text-gray-800">
                 Pedido #{selectedPedido.id}
@@ -787,12 +788,12 @@ const Analisis = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
               <div>
-                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
+                <h4 className="font-semibold text-lg md:1 md:mb-3 text-cyan-800">
                   Información del Pedido
                 </h4>
-                <div className="space-y-2">
+                <div className="md:space-y-2">
                   <p>
                     <strong>Cliente:</strong> {selectedPedido.clienteNombre}
                   </p>
@@ -829,8 +830,8 @@ const Analisis = () => {
                 </div>
               </div>
 
-              <div>
-                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg mb-1 md:mb-3 text-cyan-800">
                   Dirección de Entrega
                 </h4>
                 <div className="bg-gray-50 p-4 rounded-lg">
@@ -855,8 +856,8 @@ const Analisis = () => {
             </div>
 
             {selectedPedido.fechaEntregaEstimada && (
-              <div className="mb-6">
-                <h4 className="font-semibold text-lg mb-3 text-cyan-800">
+              <div className="mb-6 ">
+                <h4 className="font-semibold text-lg mb-0 md:mb-3 text-cyan-800">
                   Entrega Estimada
                 </h4>
                 <p className="text-lg">
